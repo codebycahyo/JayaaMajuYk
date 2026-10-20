@@ -82,10 +82,11 @@ class AdminProductCrudTest extends TestCase
 
     public function test_admin_can_delete_product(): void
     {
-        $response = $this->actingAs($this->admin)->delete(route('admin.products.destroy', $this->product->id));
+        $response = $this->actingAs($this->admin)->delete(route('admin.products.delete', $this->product->id));
 
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('admin.products.index'));
+        $this->assertDatabaseMissing('products', ['id' => $this->product->id]);
     }
 
     public function test_delete_product_with_existing_transaction(): void
@@ -108,7 +109,7 @@ class AdminProductCrudTest extends TestCase
             'subtotal' => $this->product->price,
         ]);
 
-        $response = $this->actingAs($this->admin)->delete(route('admin.products.destroy', $this->product->id));
+        $response = $this->actingAs($this->admin)->delete(route('admin.products.delete', $this->product->id));
         
         $response->assertSessionHasNoErrors();
         $response->assertRedirect(route('admin.products.index'));
@@ -117,5 +118,16 @@ class AdminProductCrudTest extends TestCase
         // Product is soft-deleted: not in default queries, but exists in withTrashed
         $this->assertNull(Product::find($this->product->id));
         $this->assertNotNull(Product::withTrashed()->find($this->product->id));
+        $this->assertEquals(0, Product::withTrashed()->find($this->product->id)->stock);
+    }
+
+    public function test_deleted_product_does_not_appear_on_homepage(): void
+    {
+        $this->product->update(['is_best_seller' => true, 'stock' => 50]);
+        $this->product->delete();
+
+        $response = $this->get(route('home'));
+        $response->assertOk();
+        $response->assertDontSee($this->product->name);
     }
 }

@@ -14,13 +14,15 @@ class ProductController extends Controller
      */
     public function index(): View
     {
-        $featuredProducts = Product::where('is_best_seller', true)
-            ->orWhere('stock', '>', 0)
-            ->take(6)
-            ->get();
+        $featuredProducts = Product::where(function ($q) {
+            $q->where('is_best_seller', true)
+              ->orWhere('stock', '>', 0);
+        })
+        ->take(6)
+        ->get();
 
         if ($featuredProducts->isEmpty()) {
-            $featuredProducts = Product::take(6)->get();
+            $featuredProducts = Product::where('stock', '>', 0)->take(6)->get();
         }
 
         $categories = Product::distinct()->pluck('category');

@@ -131,16 +131,30 @@ class AdminProductController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         try {
-            $product = Product::findOrFail($id);
+            $product = Product::withTrashed()->findOrFail($id);
             $productName = $product->name;
             $imagePath = $product->image;
 
-            $product->delete();
+            // Periksa apakah produk terkait dengan riwayat transaksi
+            $hasTransactions = $product->transactionItems()->exists();
+
+            if ($hasTransactions) {
+                // Jika memiliki riwayat transaksi, amankan data dengan soft delete & nolkan stok
+                $product->update([
+                    'stock' => 0,
+                    'is_ready_stock' => false,
+                ]);
+                $product->delete();
+            } else {
+                // Jika belum pernah ada transaksi, hapus total secara permanen
+                $product->forceDelete();
+            }
 
             $this->deleteImageFile($imagePath);
 
-            AuditLogger::log('DELETE_PRODUCT', "Menghapus produk: {$productName} (ID: {$id}).", [
+            AuditLogger::log('DELETE_PRODUCT', "Menghapus produk: {$productName} (ID: {$id}) [" . ($hasTransactions ? 'Soft Deleted' : 'Permanently Deleted') . '].', [
                 'product_id' => $id,
+                'has_transactions' => $hasTransactions,
             ]);
 
             return redirect()->route('admin.products.index')
