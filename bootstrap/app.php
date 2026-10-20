@@ -11,6 +11,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Trust all reverse proxies (Wasmer, Cloudflare, etc.)
+        $middleware->trustProxies(at: '*');
+
         // Terapkan security headers ke seluruh request web
         $middleware->web(append: [
             \App\Http\Middleware\SecurityHeadersMiddleware::class,

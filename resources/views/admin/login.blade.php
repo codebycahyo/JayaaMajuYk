@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Jaya Maju</title>
+    <style>
+        :root { --primary: #0E3481; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif; }
+    </style>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -32,7 +36,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{ route('admin.authenticate') }}" class="space-y-5">
+        <form method="POST" action="{{ route('admin.authenticate') }}" class="space-y-5" onsubmit="let b=document.getElementById('login-btn'); b.disabled=true; b.innerText='Memverifikasi Akun...';">
             @csrf
             <div>
                 <label class="block text-sm font-bold text-slate-700 mb-2">Email atau Username</label>
@@ -71,7 +75,7 @@
                 </label>
             </div>
 
-            <button type="submit" class="w-full py-3.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-opacity-95 transition-all active:scale-[0.98]">
+            <button type="submit" id="login-btn" class="w-full py-3.5 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-opacity-95 transition-all active:scale-[0.98]">
                 Masuk ke Panel Admin
             </button>
         </form>
