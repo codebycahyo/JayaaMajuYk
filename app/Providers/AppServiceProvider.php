@@ -42,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
         // Auto-migrate & seed tables on remote cloud hosting if connected to a fresh database
         if (!$isLocalHost && !app()->runningInConsole()) {
             try {
+                @set_time_limit(180);
                 if (!\Illuminate\Support\Facades\Schema::hasTable('products')) {
                     \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
                     if (\App\Models\User::count() === 0) {
@@ -49,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
                     }
                 }
             } catch (\Throwable $e) {
-                \Illuminate\Support\Facades\Log::error('Auto-migration error on cloud: ' . $e->getMessage());
+                \Illuminate\Support\Facades\Log::error('Auto-migration error on cloud: ' . $e->getMessage(), ['exception' => $e]);
             }
         }
     }
