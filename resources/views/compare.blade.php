@@ -1,97 +1,143 @@
 @extends('layouts.app')
 
-@section('title', 'Bandingkan Produk - Jaya Maju Yk')
+@section('title', 'Perbandingan Hardware POS - Jaya Maju Yk')
 
 @section('content')
-<div class="max-w-[1280px] mx-auto px-4 lg:px-10 py-8">
-    <nav class="flex items-center gap-2 py-4 text-sm text-gray-500">
-        <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Home</a>
-        <span class="material-symbols-outlined text-sm">chevron_right</span>
-        <span class="text-primary font-semibold">Bandingkan Produk</span>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-h-[75vh]">
+    <!-- Breadcrumbs -->
+    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6">
+        <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Beranda</a>
+        <span>/</span>
+        <a href="{{ route('catalog') }}" class="hover:text-primary transition-colors">Katalog</a>
+        <span>/</span>
+        <span class="text-slate-800 font-semibold">Bandingkan Hardware</span>
     </nav>
 
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 py-8">
-        <div class="max-w-2xl">
-            <h1 class="text-4xl font-black text-primary leading-tight tracking-tight mb-2">Perbandingan Hardware POS</h1>
-            <p class="text-gray-600 text-lg">Analisis detail untuk membantu Anda memilih peralatan terbaik untuk bisnis.</p>
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-border-subtle">
+        <div>
+            <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-2xl">compare_arrows</span>
+                <span>Perbandingan Spesifikasi Hardware</span>
+            </h1>
+            <p class="text-xs text-slate-500 mt-1">
+                Bandingkan port koneksi, kecepatan cetak, dan dimensi perangkat kasir berdampingan.
+            </p>
         </div>
         @if ($compareProducts->isNotEmpty())
-        <form action="{{ route('compare.clear') }}" method="POST">
-            @csrf
-            <button type="submit" class="flex items-center gap-2 border border-gray-300 px-4 py-2 rounded-lg text-sm font-bold hover:bg-gray-50 transition-colors">
-                <span class="material-symbols-outlined text-lg">delete</span> Kosongkan
-            </button>
-        </form>
+            <form action="{{ route('compare.clear') }}" method="POST">
+                @csrf
+                <button type="submit" class="h-9 px-3 border border-border-bold bg-white hover:bg-red-50 hover:text-red-600 rounded-lg text-xs font-bold transition-colors inline-flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">delete</span>
+                    <span>Kosongkan</span>
+                </button>
+            </form>
         @endif
     </div>
 
     @if ($compareProducts->isEmpty())
-        <div class="text-center py-20 bg-white rounded-3xl border border-gray-100">
-            <span class="material-symbols-outlined text-6xl text-gray-200 mb-4">compare_arrows</span>
-            <h2 class="text-xl font-bold text-slate-800">Belum ada produk untuk dibandingkan</h2>
-            <p class="text-slate-500 mt-2 mb-6">Pilih produk dari katalog untuk mulai membandingkan.</p>
-            <a href="{{ route('catalog') }}" class="bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-opacity-90 transition-all">
-                Lihat Katalog
+        <div class="bg-white rounded-xl border border-border-subtle p-12 text-center max-w-lg mx-auto">
+            <span class="material-symbols-outlined text-5xl text-slate-300 mb-2">compare_arrows</span>
+            <h2 class="text-base font-bold text-slate-800">Belum Ada Produk untuk Dibandingkan</h2>
+            <p class="text-xs text-slate-500 mt-1 mb-5">Pilih produk dari katalog kami untuk membandingkan spesifikasi teknis (maks. 4 perangkat).</p>
+            <a href="{{ route('catalog') }}" class="h-11 px-5 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition-colors shadow-xs">
+                <span class="material-symbols-outlined text-base">storefront</span>
+                <span>Buka Katalog Hardware</span>
             </a>
         </div>
     @else
-        <div class="mt-8 border border-gray-200 rounded-xl overflow-hidden shadow-2xl bg-white">
+        <div class="bg-white border border-border-subtle rounded-xl overflow-hidden shadow-xs">
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse min-w-[1000px]">
-                    <thead class="bg-gray-50 border-b border-gray-200 sticky top-0 z-10">
+                <table class="w-full text-left border-collapse min-w-[750px]">
+                    <thead class="bg-surface-bg border-b border-border-subtle">
                         <tr>
-                            <th class="p-8 w-1/4">
-                                <span class="text-xs font-black uppercase tracking-widest text-gray-400">Spesifikasi</span>
+                            <th class="p-4 w-1/4 align-top text-xs font-bold uppercase tracking-wider text-slate-500">
+                                Parameter Hardware
                             </th>
                             @foreach ($compareProducts as $product)
-                                <th class="p-6 w-1/4 border-l border-gray-100 align-top">
-                                    <div class="flex flex-col gap-4 relative group">
-                                        <form action="{{ route('compare.remove') }}" method="POST" class="absolute -top-2 -right-2 z-10">
+                                <th class="p-4 w-1/4 border-l border-border-subtle align-top">
+                                    <div class="flex flex-col gap-2 relative">
+                                        <!-- Remove button -->
+                                        <form action="{{ route('compare.remove') }}" method="POST" class="absolute top-0 right-0 z-10">
                                             @csrf
                                             <input type="hidden" name="id" value="{{ $product->id }}">
-                                            <button type="submit" class="size-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-                                                <span class="material-symbols-outlined text-[14px]">close</span>
+                                            <button type="submit" class="size-7 bg-white hover:bg-red-500 text-slate-400 hover:text-white border border-border-bold rounded-md flex items-center justify-center transition-colors" title="Hapus">
+                                                <span class="material-symbols-outlined text-xs">close</span>
                                             </button>
                                         </form>
-                                        
-                                        <img class="w-full h-40 object-contain bg-gray-50 rounded-lg p-4" src="{{ Str::startsWith($product->image, 'assets') ? asset($product->image) : $product->image }}" alt="">
-                                        
-                                        <div>
-                                            <h3 class="text-lg font-bold text-primary leading-tight">{{ $product->name }}</h3>
-                                            <p class="text-xs text-gray-500 mt-1">{{ $product->category }}</p>
+
+                                        <div class="w-full h-32 bg-white rounded-lg p-2 flex items-center justify-center border border-border-subtle">
+                                            <img class="max-w-full max-h-full object-contain" 
+                                                 src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset($product->image) }}" 
+                                                 alt="{{ $product->name }}"
+                                                 onerror="this.src='https://placehold.co/200x200?text=Hardware'">
                                         </div>
+
+                                        <div>
+                                            <span class="text-[10px] font-bold text-primary bg-primary/10 px-1.5 py-0.5 rounded">
+                                                {{ $product->category }}
+                                            </span>
+                                            <h3 class="text-xs font-bold text-slate-900 mt-1 line-clamp-2">
+                                                <a href="{{ route('product.show', $product->id) }}" class="hover:text-primary">
+                                                    {{ $product->name }}
+                                                </a>
+                                            </h3>
+                                            <div class="text-sm font-black text-slate-900 mt-1">
+                                                Rp {{ number_format($product->price, 0, ',', '.') }}
+                                            </div>
+                                        </div>
+
+                                        <form action="{{ route('cart.add') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $product->id }}">
+                                            <input type="hidden" name="qty" value="1">
+                                            <button type="submit" class="w-full h-10 px-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1 transition-colors shadow-xs">
+                                                <span class="material-symbols-outlined text-sm">shopping_cart</span>
+                                                <span>+ Keranjang</span>
+                                            </button>
+                                        </form>
                                     </div>
                                 </th>
                             @endforeach
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-gray-100">
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="p-8 bg-gray-50/50">
-                                <div class="flex items-center gap-2 text-primary font-bold">
-                                    <span class="material-symbols-outlined text-xl">payments</span> Harga
-                                </div>
-                            </td>
+                    <tbody class="divide-y divide-border-subtle text-xs">
+                        <!-- Ketersediaan Stok -->
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="p-3.5 font-bold text-slate-700 bg-surface-bg">Ketersediaan Stok</td>
                             @foreach ($compareProducts as $p)
-                                <td class="p-8 border-l border-gray-100">
-                                    <div class="text-2xl font-black text-primary">Rp {{ number_format($p->price, 0, ',', '.') }}</div>
+                                <td class="p-3.5 border-l border-border-subtle">
+                                    @if ($p->stock > 0)
+                                        <span class="text-emerald-700 font-bold">&bull; Ready ({{ $p->stock }} unit)</span>
+                                    @else
+                                        <span class="text-red-600 font-bold">&bull; Stok Habis</span>
+                                    @endif
                                 </td>
                             @endforeach
                         </tr>
-                        @foreach ($allSpecKeys as $key)
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="p-8 bg-gray-50/50">
-                                    <div class="flex items-center gap-2 text-primary font-bold">
-                                        <span class="material-symbols-outlined text-xl">info</span> {{ $key }}
-                                    </div>
+
+                        <!-- Garansi -->
+                        <tr class="hover:bg-slate-50/50">
+                            <td class="p-3.5 font-bold text-slate-700 bg-surface-bg">Jaminan Garansi</td>
+                            @foreach ($compareProducts as $p)
+                                <td class="p-3.5 border-l border-border-subtle text-slate-700">
+                                    Garansi Resmi 1 Tahun Jaya Maju
                                 </td>
-                                @foreach ($compareProducts as $p)
-                                    <td class="p-8 border-l border-gray-100 text-sm text-gray-600 font-medium">
-                                        {{ $p->specs[$key] ?? '-' }}
-                                    </td>
-                                @endforeach
-                            </tr>
-                        @endforeach
+                            @endforeach
+                        </tr>
+
+                        <!-- Dynamic Specs -->
+                        @if (!empty($allSpecKeys))
+                            @foreach ($allSpecKeys as $key)
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="p-3.5 font-bold text-slate-700 bg-surface-bg">{{ $key }}</td>
+                                    @foreach ($compareProducts as $p)
+                                        <td class="p-3.5 border-l border-border-subtle text-slate-800">
+                                            {{ $p->specs[$key] ?? '-' }}
+                                        </td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

@@ -2,108 +2,209 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use App\Services\AuditLogger;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class AdminProductController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'desc')->get();
         return view('admin.index', compact('products'));
     }
 
-    public function create()
+    public function create(): View
     {
         return view('admin.form');
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request): RedirectResponse
     {
-        $request->validate([
-            'id' => 'required|unique:products',
-            'name' => 'required',
-            'category' => 'required',
-            'price' => 'required|numeric',
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
-        ]);
+        $validated = $request->validated();
+        $uploadedPath = null;
 
-        $data = $request->all();
-        
-        if ($request->has('specs_raw')) {
-            $specs = [];
-            $lines = explode("\n", $request->specs_raw);
-            foreach ($lines as $line) {
-                if (str_contains($line, '=')) {
-                    list($k, $v) = explode('=', $line, 2);
-                    $specs[trim($k)] = trim($v);
-                }
+        try {
+            DB::beginTransaction();
+
+            $validated['specs'] = $this->parseSpecs($request->input('specs_raw'));
+            unset($validated['specs_raw']);
+
+            if ($request->hasFile('image')) {
+                $uploadedPath = $this->storeProductImage($request->file('image'));
+                $validated['image'] = $uploadedPath;
             }
-            $data['specs'] = $specs;
+
+            $validated['is_ready_stock'] = ($validated['stock'] ?? 0) > 0;
+
+            $product = Product::create($validated);
+
+            AuditLogger::log('CREATE_PRODUCT', "Menambahkan produk baru: {$product->name} (ID: {$product->id}) dengan stok {$product->stock}.", [
+                'product_id' => $product->id,
+                'price' => $product->price,
+                'stock' => $product->stock,
+            ]);
+
+            DB::commit();
+
+            return redirect()->route('admin.products.index')
+                ->with('success', 'Produk baru berhasil ditambahkan.');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            if ($uploadedPath) {
+                $this->deleteImageFile($uploadedPath);
+            }
+
+            Log::error('Gagal menyimpan produk baru: ' . $e->getMessage(), ['exception' => $e]);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan saat menyimpan produk. Silakan coba kembali.');
         }
-
-        if ($request->hasFile('image')) {
-            $imageName = $request->id . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path('assets/products'), $imageName);
-            $data['image'] = 'assets/products/' . $imageName;
-        }
-
-        Product::create($data);
-
-        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil ditambahkan.');
     }
 
-    public function edit($id)
+    public function edit(string $id): View
     {
         $product = Product::findOrFail($id);
         return view('admin.form', compact('product'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, string $id): RedirectResponse
     {
         $product = Product::findOrFail($id);
-        
-        $request->validate([
-            'name' => 'required',
-            'category' => 'required',
-            'price' => 'required|numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
-        ]);
+        $validated = $request->validated();
+        $newUploadedPath = null;
+        $oldImagePath = $product->image;
+        $oldStock = $product->stock;
 
-        $data = $request->all();
-        
-        if ($request->has('specs_raw')) {
-            $specs = [];
-            $lines = explode("\n", $request->specs_raw);
-            foreach ($lines as $line) {
-                if (str_contains($line, '=')) {
-                    list($k, $v) = explode('=', $line, 2);
-                    $specs[trim($k)] = trim($v);
-                }
+        try {
+            DB::beginTransaction();
+
+            $validated['specs'] = $this->parseSpecs($request->input('specs_raw'));
+            unset($validated['specs_raw']);
+
+            if ($request->hasFile('image')) {
+                $newUploadedPath = $this->storeProductImage($request->file('image'));
+                $validated['image'] = $newUploadedPath;
             }
-            $data['specs'] = $specs;
-        } else {
-            $data['specs'] = [];
+
+            $validated['is_ready_stock'] = ($validated['stock'] ?? 0) > 0;
+
+            $product->update($validated);
+
+            AuditLogger::log('UPDATE_PRODUCT', "Memperbarui produk: {$product->name} (ID: {$product->id}). Stok: {$oldStock} -> {$product->stock}.", [
+                'product_id' => $product->id,
+                'changes' => $product->getChanges(),
+            ]);
+
+            DB::commit();
+
+            if ($newUploadedPath && $oldImagePath) {
+                $this->deleteImageFile($oldImagePath);
+            }
+
+            return redirect()->route('admin.products.index')
+                ->with('success', 'Produk berhasil diperbarui.');
+        } catch (\Throwable $e) {
+            DB::rollBack();
+
+            if ($newUploadedPath) {
+                $this->deleteImageFile($newUploadedPath);
+            }
+
+            Log::error("Gagal memperbarui produk [ID: {$id}]: " . $e->getMessage(), ['exception' => $e]);
+
+            return back()
+                ->withInput()
+                ->with('error', 'Terjadi kesalahan saat memperbarui produk. Silakan coba kembali.');
         }
-
-        if ($request->hasFile('image')) {
-            $imageName = $product->id . '.' . $request->file('image')->getClientOriginalExtension();
-            $request->file('image')->move(public_path('assets/products'), $imageName);
-            $data['image'] = 'assets/products/' . $imageName;
-        }
-
-        $product->update($data);
-
-        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil diperbarui.');
     }
 
-    public function destroy($id)
+    public function destroy(string $id): RedirectResponse
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
+        try {
+            $product = Product::findOrFail($id);
+            $productName = $product->name;
+            $imagePath = $product->image;
 
-        return redirect()->route('admin.products.index')->with('success', 'Produk berhasil dihapus.');
+            $product->delete();
+
+            $this->deleteImageFile($imagePath);
+
+            AuditLogger::log('DELETE_PRODUCT', "Menghapus produk: {$productName} (ID: {$id}).", [
+                'product_id' => $id,
+            ]);
+
+            return redirect()->route('admin.products.index')
+                ->with('success', 'Produk berhasil dihapus.');
+        } catch (\Throwable $e) {
+            Log::error("Gagal menghapus produk [ID: {$id}]: " . $e->getMessage(), ['exception' => $e]);
+
+            return back()->with('error', 'Gagal menghapus produk karena data memiliki keterkaitan dengan transaksi.');
+        }
+    }
+
+    private function parseSpecs(?string $rawSpecs): array
+    {
+        if (empty($rawSpecs)) {
+            return [];
+        }
+
+        $specs = [];
+        $lines = preg_split('/\r\n|\r|\n/', trim($rawSpecs));
+
+        foreach ($lines as $line) {
+            $line = trim($line);
+            if ($line === '' || !str_contains($line, '=')) {
+                continue;
+            }
+
+            [$key, $val] = explode('=', $line, 2);
+            $cleanKey = trim(strip_tags($key));
+            $cleanVal = trim(strip_tags($val));
+
+            if ($cleanKey !== '') {
+                $specs[$cleanKey] = $cleanVal;
+            }
+        }
+
+        return $specs;
+    }
+
+    private function storeProductImage(UploadedFile $file): string
+    {
+        $extension = $file->guessExtension() ?: 'jpg';
+        $safeFileName = Str::uuid() . '.' . $extension;
+        $targetDir = public_path('assets/products');
+
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0755, true);
+        }
+
+        $file->move($targetDir, $safeFileName);
+
+        return 'assets/products/' . $safeFileName;
+    }
+
+    private function deleteImageFile(?string $relativePath): void
+    {
+        if (!$relativePath || Str::startsWith($relativePath, ['http://', 'https://'])) {
+            return;
+        }
+
+        $realTarget = realpath(public_path(ltrim($relativePath, '/')));
+        $allowedBase = realpath(public_path('assets/products'));
+
+        if ($realTarget && $allowedBase && str_starts_with($realTarget, $allowedBase) && is_file($realTarget)) {
+            @unlink($realTarget);
+        }
     }
 }

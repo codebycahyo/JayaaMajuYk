@@ -1,110 +1,220 @@
 @extends('layouts.app')
 
-@section('title', 'Katalog - Jaya Maju Yk')
+@section('title', 'Katalog Hardware POS & Mesin Kasir - Jaya Maju Yk')
+@section('description', 'Katalog lengkap printer kasir thermal, barcode scanner, komputer all-in-one, dan laci uang cash drawer bergaransi resmi di Yogyakarta.')
 
 @section('content')
-<!-- Catalog Section -->
-<section id="catalog" class="max-w-[1200px] mx-auto px-6 pb-20 pt-10 min-h-screen">
-    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
-        <div class="space-y-4">
-            <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px]">Pilih Kategori</span>
-            <h2 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tight">Katalog Produk</h2>
-        </div>
-        
-        <!-- Filter Bar -->
-        <div class="flex items-center gap-3 bg-white p-2 rounded-2xl border border-gray-100 shadow-sm overflow-x-auto snap-x scroll-pl-6 no-scrollbar pb-2 md:pb-2">
-            <a href="{{ route('catalog') }}" class="snap-start shrink-0 px-6 py-4 md:py-3 rounded-xl text-xs font-black uppercase transition-all active:scale-95 {{ !request('category') ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-primary hover:bg-gray-50' }}">Semua</a>
-            @foreach($categories as $cat)
-                <a href="{{ route('catalog', ['category' => $cat]) }}" class="snap-start shrink-0 whitespace-nowrap px-6 py-4 md:py-3 rounded-xl text-xs font-black uppercase transition-all active:scale-95 {{ request('category') === $cat ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-primary hover:bg-gray-50' }}">
-                    {{ $cat }}
-                </a>
-            @endforeach
+<!-- Breadcrumbs & Header -->
+<div class="bg-white border-b border-border-subtle py-6">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <nav class="flex items-center gap-2 text-xs text-slate-500 mb-2">
+            <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Beranda</a>
+            <span>/</span>
+            <span class="text-slate-800 font-semibold">Katalog Produk</span>
+        </nav>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Katalog Hardware Kasir</h1>
+            <div class="text-xs text-slate-500">
+                Total: <strong class="text-slate-900 font-bold">{{ $products->total() }}</strong> hardware tersedia
+            </div>
         </div>
     </div>
+</div>
 
-    @if ($products->isEmpty())
-        <div class="text-center py-40 bg-white rounded-[4rem] border border-gray-100 shadow-sm">
-            <span class="material-symbols-outlined text-8xl text-gray-100 mb-6">inventory_2</span>
-            <h3 class="text-2xl font-black text-slate-900">Wah, stok tidak ditemukan</h3>
-            <a href="{{ route('catalog') }}" class="mt-10 px-10 py-5 bg-primary text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:scale-105 transition-all shadow-xl shadow-primary/20 inline-block active:scale-95">
-                Reset Filter
-            </a>
-        </div>
-    @else
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-            @foreach ($products as $product)
-            <div class="group bg-white rounded-3xl border border-slate-100 p-4 transition-all duration-300 hover:border-primary/20 hover:shadow-2xl hover:shadow-primary/5 hover:-translate-y-1 flex flex-col h-full active:border-primary/50">
-                <!-- Image -->
-                <div class="relative aspect-[4/3] rounded-2xl overflow-hidden bg-slate-50 mb-6 group/image">
-                    @if ($product->images && count($product->images) > 1)
-                        <div class="flex overflow-x-auto snap-x snap-mandatory h-full no-scrollbar scroll-smooth">
-                            @foreach ($product->images as $img)
-                                <img 
-                                    src="{{ Str::startsWith($img, 'assets') ? asset($img) : $img }}" 
-                                    alt="{{ $product->name }}" 
-                                    class="snap-center shrink-0 w-full h-full object-contain mix-blend-multiply p-4"
-                                />
-                            @endforeach
-                        </div>
-                        <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 group-hover/image:opacity-100 transition-opacity">
-                            @foreach ($product->images as $img)
-                                <div class="size-1.5 rounded-full bg-slate-300"></div>
-                            @endforeach
-                        </div>
-                    @else
-                        <img 
-                            src="{{ Str::startsWith($product->image, 'assets') ? asset($product->image) : $product->image }}" 
-                            alt="{{ $product->name }}" 
-                            class="w-full h-full object-contain mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
-                        />
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Filter Sidebar (Col 3 on Desktop) -->
+        <aside class="lg:col-span-3">
+            <div class="bg-white p-5 rounded-xl border border-border-subtle shadow-xs space-y-5 sticky top-24">
+                <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                    <span class="font-bold text-xs uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-base text-primary">filter_list</span>
+                        Filter Produk
+                    </span>
+                    @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'ready_only', 'sort']))
+                        <a href="{{ route('catalog') }}" class="text-xs font-bold text-red-600 hover:underline">Reset</a>
                     @endif
-                    
-                    <div class="absolute top-3 left-3 flex gap-2 z-10">
-                        <span class="bg-white/80 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider text-slate-700 shadow-sm">
-                            {{ $product->category }}
-                        </span>
+                </div>
+
+                <form method="GET" action="{{ route('catalog') }}" id="filterForm" class="space-y-5">
+                    <!-- Search Input -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Pencarian Nama</label>
+                        <div class="relative">
+                            <input 
+                                type="text" 
+                                name="search" 
+                                value="{{ request('search') }}" 
+                                placeholder="Printer, scanner..." 
+                                class="w-full h-11 px-3 text-xs rounded-lg border border-border-bold focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                            >
+                        </div>
                     </div>
 
-                    <a href="{{ route('product.show', $product->id) }}" class="absolute inset-0 z-10"></a>
-                </div>
-
-                <!-- Info -->
-                <div class="flex-grow space-y-4 px-2">
-                    <h3 class="font-black text-lg text-slate-900 leading-tight group-hover:text-primary transition-colors">
-                        <a href="{{ route('product.show', $product->id) }}">
-                            {{ $product->name }}
-                        </a>
-                    </h3>
-                    
-                    <div class="flex items-center gap-2">
-                        <span class="text-primary font-black text-xl">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
-                        @if ($product->original_price)
-                            <span class="text-slate-300 line-through text-sm decoration-2">Rp {{ number_format($product->original_price, 0, ',', '.') }}</span>
-                        @endif
+                    <!-- Category Radio Selection -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-2">Kategori Hardware</label>
+                        <div class="space-y-1 text-xs">
+                            <label class="flex items-center gap-2 p-1.5 rounded hover:bg-slate-50 cursor-pointer">
+                                <input type="radio" name="category" value="Semua" onchange="this.form.submit()" {{ !request('category') || request('category') === 'Semua' ? 'checked' : '' }} class="text-primary focus:ring-primary">
+                                <span class="text-slate-700 font-medium">Semua Kategori</span>
+                            </label>
+                            @foreach ($categories as $cat)
+                                <label class="flex items-center gap-2 p-1.5 rounded hover:bg-slate-50 cursor-pointer">
+                                    <input type="radio" name="category" value="{{ $cat }}" onchange="this.form.submit()" {{ request('category') === $cat ? 'checked' : '' }} class="text-primary focus:ring-primary">
+                                    <span class="text-slate-700 font-medium">{{ $cat }}</span>
+                                </label>
+                            @endforeach
+                        </div>
                     </div>
-                </div>
 
-                <div class="mt-6 pt-4 border-t border-slate-50 flex gap-3 relative z-20">
-                    <form action="#" method="POST" class="flex-1">
-                         @csrf
-                         <input type="hidden" name="id" value="{{ $product->id }}">
-                         <button type="submit" class="w-full bg-slate-100 hover:bg-primary hover:text-white text-slate-600 font-bold py-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm active:scale-95 active:bg-primary active:text-white">
-                             <span class="material-symbols-outlined text-lg">add_shopping_cart</span>
-                             Keranjang
-                         </button>
-                    </form>
+                    <!-- Price Min-Max -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Rentang Harga (Rp)</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <input 
+                                type="number" 
+                                name="min_price" 
+                                value="{{ request('min_price') }}" 
+                                placeholder="Min" 
+                                class="w-full h-10 px-2.5 text-xs rounded-lg border border-border-bold focus:outline-none focus:border-primary"
+                            >
+                            <input 
+                                type="number" 
+                                name="max_price" 
+                                value="{{ request('max_price') }}" 
+                                placeholder="Maks" 
+                                class="w-full h-10 px-2.5 text-xs rounded-lg border border-border-bold focus:outline-none focus:border-primary"
+                            >
+                        </div>
+                    </div>
 
-                    <form action="#" method="POST">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $product->id }}">
-                        <button type="submit" class="h-full px-5 bg-indigo-50 text-indigo-600 hover:bg-indigo-100 rounded-xl transition-all active:scale-95 flex items-center justify-center" title="Bandingkan">
-                             <span class="material-symbols-outlined text-xl">compare_arrows</span>
-                        </button>
-                    </form>
-                </div>
+                    <!-- Ready Stock Only -->
+                    <div>
+                        <label class="flex items-center gap-2 text-xs font-bold text-slate-700 cursor-pointer">
+                            <input type="checkbox" name="ready_only" value="1" {{ request('ready_only') ? 'checked' : '' }} class="rounded border-border-bold text-primary focus:ring-primary">
+                            <span>Hanya Stok Siap Kirim</span>
+                        </label>
+                    </div>
+
+                    <!-- Sorting -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5">Urutkan Berdasarkan</label>
+                        <select name="sort" onchange="this.form.submit()" class="w-full h-10 px-2.5 text-xs rounded-lg border border-border-bold focus:outline-none focus:border-primary bg-white text-slate-700">
+                            <option value="latest" {{ request('sort') === 'latest' ? 'selected' : '' }}>Terbaru</option>
+                            <option value="price_asc" {{ request('sort') === 'price_asc' ? 'selected' : '' }}>Harga: Termurah</option>
+                            <option value="price_desc" {{ request('sort') === 'price_desc' ? 'selected' : '' }}>Harga: Termahal</option>
+                            <option value="name_asc" {{ request('sort') === 'name_asc' ? 'selected' : '' }}>Nama A - Z</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full h-11 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold transition-colors shadow-xs">
+                        Terapkan Filter
+                    </button>
+                </form>
             </div>
-            @endforeach
-        </div>
-    @endif
-</section>
+        </aside>
+
+        <!-- Product List Grid (Col 9 on Desktop) -->
+        <main class="lg:col-span-9">
+            @if ($products->isEmpty())
+                <div class="bg-white rounded-xl border border-border-subtle p-12 text-center">
+                    <span class="material-symbols-outlined text-4xl text-slate-300 mb-2">search_off</span>
+                    <h2 class="text-base font-bold text-slate-800">Produk Tidak Ditemukan</h2>
+                    <p class="text-xs text-slate-500 mt-1 max-w-sm mx-auto">Tidak ada hardware yang cocok dengan kriteria filter Anda. Coba reset filter untuk melihat seluruh katalog.</p>
+                    <a href="{{ route('catalog') }}" class="mt-4 inline-flex items-center h-10 px-4 bg-primary text-white rounded-lg text-xs font-bold hover:bg-primary-dark transition-colors">
+                        Reset Filter
+                    </a>
+                </div>
+            @else
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    @foreach ($products as $product)
+                        <div class="bg-white border border-border-subtle hover:border-border-bold rounded-xl p-4 flex flex-col justify-between shadow-xs transition-colors">
+                            <div>
+                                <!-- Header Badge -->
+                                <div class="flex items-center justify-between gap-2 mb-2.5">
+                                    <span class="text-[10px] font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">
+                                        {{ $product->category }}
+                                    </span>
+                                    @if ($product->stock > 0)
+                                        <span class="text-[11px] font-bold text-emerald-700 flex items-center gap-1">
+                                            <span class="size-1.5 rounded-full bg-emerald-600"></span>
+                                            Ready ({{ $product->stock }})
+                                        </span>
+                                    @else
+                                        <span class="text-[11px] font-bold text-red-600">Habis</span>
+                                    @endif
+                                </div>
+
+                                <!-- 1:1 Image Container -->
+                                <a href="{{ route('product.show', $product->id) }}" class="block aspect-square bg-surface-bg rounded-lg p-3 flex items-center justify-center border border-border-subtle mb-3">
+                                    <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset($product->image) }}" 
+                                         alt="{{ $product->name }}" 
+                                         class="max-h-full max-w-full object-contain"
+                                         onerror="this.src='https://placehold.co/300x300?text=Hardware'">
+                                </a>
+
+                                <!-- Title -->
+                                <h2 class="font-bold text-slate-900 text-sm line-clamp-2 leading-snug mb-1.5">
+                                    <a href="{{ route('product.show', $product->id) }}" class="hover:text-primary transition-colors">
+                                        {{ $product->name }}
+                                    </a>
+                                </h2>
+
+                                <!-- Specs Preview -->
+                                @if ($product->specs)
+                                    <div class="text-[11px] text-slate-500 space-y-0.5 mb-3 line-clamp-2">
+                                        @foreach (array_slice($product->specs, 0, 2) as $key => $val)
+                                            <div>&bull; {{ $key }}: <span class="text-slate-700 font-medium">{{ $val }}</span></div>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div>
+                                <!-- Price -->
+                                <div class="pt-2 border-t border-slate-100 mb-3">
+                                    <div class="text-base font-black text-slate-900">
+                                        Rp {{ number_format($product->price, 0, ',', '.') }}
+                                    </div>
+                                </div>
+
+                                <!-- Actions: Add Cart & WhatsApp (Min 44px) -->
+                                <div class="grid grid-cols-2 gap-2">
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <input type="hidden" name="qty" value="1">
+                                        <button type="submit" class="w-full h-11 px-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1 transition-colors">
+                                            <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+                                            <span>+ Keranjang</span>
+                                        </button>
+                                    </form>
+
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $product->id }}">
+                                        <input type="hidden" name="qty" value="1">
+                                        <button type="submit" name="buy_now" value="1" class="w-full h-11 px-2 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1 transition-colors" title="Beli">
+                                            <span class="material-symbols-outlined text-base">shopping_bag</span>
+                                            <span>Beli</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <!-- Clean Pagination -->
+                @if ($products->hasPages())
+                    <div class="mt-8 pt-6 border-t border-border-subtle">
+                        {{ $products->links() }}
+                    </div>
+                @endif
+            @endif
+        </main>
+    </div>
+</div>
 @endsection

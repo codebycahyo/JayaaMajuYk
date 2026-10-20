@@ -4,19 +4,19 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class AdminAuth
 {
     /**
-     * Handle an incoming request.
-     *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * Memastikan request hanya dapat diakses oleh pengguna yang sudah terotentikasi (admin atau kasir).
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (session('user') !== 'admin') {
-            return redirect()->route('admin.login');
+        if (!Auth::check()) {
+            return redirect()->route('admin.login')
+                ->with('error', 'Silakan masuk terlebih dahulu untuk mengakses fitur ini.');
         }
 
         return $next($request);

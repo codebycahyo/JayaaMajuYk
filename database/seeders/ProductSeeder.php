@@ -27,6 +27,7 @@ class ProductSeeder extends Seeder
                     'category' => $productData['category'],
                     'price' => $productData['price'],
                     'original_price' => $productData['originalPrice'] ?? null,
+                    'stock' => 50,
                     'description' => $productData['description'],
                     'image' => $productData['image'],
                     'images' => $productData['images'] ?? null,
