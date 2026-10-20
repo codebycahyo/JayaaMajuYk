@@ -124,7 +124,7 @@ class AdminProductController extends Controller
 
             return back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan saat memperbarui produk. Silakan coba kembali.');
+                ->with('error', 'Terjadi kesalahan saat memperbarui produk: ' . $e->getMessage());
         }
     }
 
@@ -144,11 +144,11 @@ class AdminProductController extends Controller
             ]);
 
             return redirect()->route('admin.products.index')
-                ->with('success', 'Produk berhasil dihapus.');
+                ->with('success', "Produk '{$productName}' berhasil dihapus.");
         } catch (\Throwable $e) {
             Log::error("Gagal menghapus produk [ID: {$id}]: " . $e->getMessage(), ['exception' => $e]);
 
-            return back()->with('error', 'Gagal menghapus produk karena data memiliki keterkaitan dengan transaksi.');
+            return back()->with('error', 'Gagal menghapus produk: ' . $e->getMessage());
         }
     }
 
@@ -186,7 +186,7 @@ class AdminProductController extends Controller
         $targetDir = public_path('assets/products');
 
         if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0755, true);
+            @mkdir($targetDir, 0755, true);
         }
 
         $file->move($targetDir, $safeFileName);
@@ -197,6 +197,12 @@ class AdminProductController extends Controller
     private function deleteImageFile(?string $relativePath): void
     {
         if (!$relativePath || Str::startsWith($relativePath, ['http://', 'https://'])) {
+            return;
+        }
+
+        $filename = basename($relativePath);
+        // Hanya hapus file gambar yang diunggah dinamis (UUID) agar gambar default katalog tetap aman
+        if (!preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\./i', $filename)) {
             return;
         }
 

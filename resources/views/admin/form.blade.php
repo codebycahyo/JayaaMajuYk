@@ -78,13 +78,19 @@
                     <label class="block text-sm font-bold text-slate-700 mb-2">
                         Kategori <span class="text-red-500">*</span>
                     </label>
+                    @php
+                        $availableCategories = ['Printer Kasir', 'Barcode Scanner', 'Komputer Kasir', 'Paket Usaha'];
+                        if (isset($product) && $product->category && !in_array($product->category, $availableCategories)) {
+                            $availableCategories[] = $product->category;
+                        }
+                    @endphp
                     <select 
                         name="category" 
                         class="w-full px-4 py-3 rounded-xl border @error('category') border-red-500 @else border-slate-200 @enderror focus:outline-none focus:border-primary font-medium text-slate-800"
                         required
                     >
                         <option value="" disabled {{ old('category', $product->category ?? '') == '' ? 'selected' : '' }}>Pilih Kategori</option>
-                        @foreach(['Printer Kasir', 'Barcode Scanner', 'Komputer Kasir', 'Paket Usaha'] as $cat)
+                        @foreach($availableCategories as $cat)
                             <option value="{{ $cat }}" {{ old('category', $product->category ?? '') === $cat ? 'selected' : '' }}>{{ $cat }}</option>
                         @endforeach
                     </select>
