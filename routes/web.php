@@ -22,10 +22,10 @@ Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.s
 
 // Cart Routes
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::post('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::match(['get', 'post'], '/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::match(['get', 'post'], '/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::match(['get', 'post'], '/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::match(['get', 'post'], '/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 
 // Checkout & Order Tracking Routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
@@ -35,16 +35,16 @@ Route::get('/track-order', [CheckoutController::class, 'track'])->name('order.tr
 
 // Product Comparison Routes
 Route::get('/compare', [CompareController::class, 'index'])->name('compare');
-Route::post('/compare/add', [CompareController::class, 'add'])->name('compare.add');
-Route::post('/compare/remove', [CompareController::class, 'remove'])->name('compare.remove');
-Route::post('/compare/clear', [CompareController::class, 'clear'])->name('compare.clear');
+Route::match(['get', 'post'], '/compare/add', [CompareController::class, 'add'])->name('compare.add');
+Route::match(['get', 'post'], '/compare/remove', [CompareController::class, 'remove'])->name('compare.remove');
+Route::match(['get', 'post'], '/compare/clear', [CompareController::class, 'clear'])->name('compare.clear');
 
 // ==========================================
 // 2. AUTHENTICATION ROUTES
 // ==========================================
 Route::get('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'authenticate'])->name('admin.authenticate');
-Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+Route::match(['get', 'post'], '/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
 // ==========================================
 // 3. INTERNAL STAFF & CASHIER (POS) ROUTES
@@ -52,7 +52,7 @@ Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admi
 Route::middleware('admin.auth')->group(function () {
     // Ubah Kata Sandi Akun
     Route::get('/admin/profile/password', [ProfileController::class, 'editPassword'])->name('profile.password');
-    Route::put('/admin/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    Route::match(['post', 'put'], '/admin/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
 
     // Modul Point of Sale (POS)
     Route::prefix('pos')->name('pos.')->group(function () {
@@ -72,11 +72,14 @@ Route::prefix('admin')->name('admin.')->middleware(['admin.auth', 'role:admin'])
     Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
     Route::get('/products/{id}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
     Route::match(['post', 'put'], '/products/{id}', [AdminProductController::class, 'update'])->name('products.update');
-    Route::match(['post', 'delete'], '/products/{id}/delete', [AdminProductController::class, 'destroy'])->name('products.delete');
+    Route::match(['get', 'post', 'delete'], '/products/{id}/delete', [AdminProductController::class, 'destroy'])->name('products.delete');
     Route::delete('/products/{id}', [AdminProductController::class, 'destroy'])->name('products.destroy');
 
     // Manajemen Pengguna (Admin, Kasir, Staff)
     Route::resource('users', AdminUserController::class);
+    Route::match(['post', 'put'], '/users/{user}', [AdminUserController::class, 'update'])->name('users.update.fallback');
+    Route::match(['get', 'post', 'delete'], '/users/{user}/delete', [AdminUserController::class, 'destroy'])->name('users.delete');
+    Route::match(['post', 'delete'], '/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy.fallback');
 
     // Laporan Penjualan & Ekspor Data
     Route::prefix('reports')->name('reports.')->group(function () {

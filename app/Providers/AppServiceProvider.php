@@ -16,8 +16,18 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Enforce HTTPS behind reverse proxies (Wasmer, Cloudflare)
-        if (request()->header('x-forwarded-proto') === 'https' || str_contains(config('app.url'), 'https://') || app()->environment('production')) {
+        // Enforce HTTPS behind reverse proxies (Wasmer, Cloudflare) and all remote cloud hosts
+        $host = request()->getHost();
+        $isLocalHost = in_array($host, ['localhost', '127.0.0.1', '::1', '']) || str_ends_with($host, '.test') || str_ends_with($host, '.local');
+
+        if (
+            !$isLocalHost
+            || request()->header('x-forwarded-proto') === 'https'
+            || request()->header('x-forwarded-ssl') === 'on'
+            || request()->server('HTTPS') === 'on'
+            || str_contains(config('app.url'), 'https://')
+            || app()->environment('production')
+        ) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
 
