@@ -17,8 +17,8 @@
             <span>Software Kasir Minimarket &bull; Mitra Setia</span>
         </div>
 
-        <!-- Big Punchy Black Headline -->
-        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-black leading-[1.12] mb-6">
+        <!-- Big Punchy Black Headline (Fluid Typography for Mobile & Desktop) -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-black leading-[1.14] mb-6">
             Solusi Mesin Kasir &amp; Software Kasir Tanpa Biaya Langganan.
         </h1>
 
@@ -87,39 +87,71 @@
                     </div>
                 </div>
 
-                <!-- Transaction Items Table Preview -->
-                <div class="py-3 space-y-2 text-[11px] sm:text-xs">
-                    <div class="hidden sm:grid grid-cols-12 text-zinc-500 font-bold border-b border-zinc-900 pb-1.5 uppercase text-[10px]">
-                        <div class="col-span-2">Kode / Barcode</div>
-                        <div class="col-span-5">Nama Barang</div>
-                        <div class="col-span-1 text-center">Qty</div>
-                        <div class="col-span-2 text-right">Harga</div>
-                        <div class="col-span-2 text-right">Subtotal</div>
+                <!-- Transaction Items Table Preview (Responsive for Mobile & Desktop) -->
+                <div class="py-3 text-[11px] sm:text-xs">
+                    
+                    <!-- Mobile View: Clean Receipt Rows -->
+                    <div class="sm:hidden space-y-2.5">
+                        <div class="flex items-start justify-between gap-2 pb-2 border-b border-zinc-900/80">
+                            <div>
+                                <div class="font-semibold text-white text-xs">Minyak Goreng Bimoli 2L</div>
+                                <div class="text-[10px] text-zinc-400 font-mono mt-0.5">8992753001 &bull; 2 pcs &times; Rp 34.000</div>
+                            </div>
+                            <div class="text-right shrink-0 font-bold text-white text-xs">Rp 68.000</div>
+                        </div>
+
+                        <div class="flex items-start justify-between gap-2 pb-2 border-b border-zinc-900/80">
+                            <div>
+                                <div class="font-semibold text-white text-xs">Beras Premium Ramos 5kg</div>
+                                <div class="text-[10px] text-zinc-400 font-mono mt-0.5">8999909012 &bull; 1 sak &times; Rp 72.500</div>
+                            </div>
+                            <div class="text-right shrink-0 font-bold text-white text-xs">Rp 72.500</div>
+                        </div>
+
+                        <div class="flex items-start justify-between gap-2 pb-2 border-b border-zinc-900/80">
+                            <div>
+                                <div class="font-semibold text-white text-xs">Gula Pasir Gulaku 1kg</div>
+                                <div class="text-[10px] text-zinc-400 font-mono mt-0.5">8991001004 &bull; 1 pcs &times; Rp 17.500</div>
+                            </div>
+                            <div class="text-right shrink-0 font-bold text-white text-xs">Rp 17.500</div>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-1 sm:gap-0 text-zinc-300">
-                        <div class="sm:col-span-2 text-zinc-500 font-medium">8992753001</div>
-                        <div class="sm:col-span-5 font-semibold text-white">Minyak Goreng Bimoli 2L</div>
-                        <div class="sm:col-span-1 sm:text-center text-zinc-400">2 pcs</div>
-                        <div class="sm:col-span-2 sm:text-right text-zinc-400">Rp 34.000</div>
-                        <div class="sm:col-span-2 sm:text-right font-bold text-white">Rp 68.000</div>
+                    <!-- Desktop View: 12-Column Grid Table -->
+                    <div class="hidden sm:block space-y-2">
+                        <div class="grid grid-cols-12 text-zinc-500 font-bold border-b border-zinc-900 pb-1.5 uppercase text-[10px]">
+                            <div class="col-span-2">Kode / Barcode</div>
+                            <div class="col-span-5">Nama Barang</div>
+                            <div class="col-span-1 text-center">Qty</div>
+                            <div class="col-span-2 text-right">Harga</div>
+                            <div class="col-span-2 text-right">Subtotal</div>
+                        </div>
+
+                        <div class="grid grid-cols-12 items-center text-zinc-300">
+                            <div class="col-span-2 text-zinc-500 font-medium">8992753001</div>
+                            <div class="col-span-5 font-semibold text-white">Minyak Goreng Bimoli 2L</div>
+                            <div class="col-span-1 text-center text-zinc-400">2 pcs</div>
+                            <div class="col-span-2 text-right text-zinc-400">Rp 34.000</div>
+                            <div class="col-span-2 text-right font-bold text-white">Rp 68.000</div>
+                        </div>
+
+                        <div class="grid grid-cols-12 items-center text-zinc-300">
+                            <div class="col-span-2 text-zinc-500 font-medium">8999909012</div>
+                            <div class="col-span-5 font-semibold text-white">Beras Premium Ramos 5kg</div>
+                            <div class="col-span-1 text-center text-zinc-400">1 sak</div>
+                            <div class="col-span-2 text-right text-zinc-400">Rp 72.500</div>
+                            <div class="col-span-2 text-right font-bold text-white">Rp 72.500</div>
+                        </div>
+
+                        <div class="grid grid-cols-12 items-center text-zinc-300">
+                            <div class="col-span-2 text-zinc-500 font-medium">8991001004</div>
+                            <div class="col-span-5 font-semibold text-white">Gula Pasir Gulaku 1kg</div>
+                            <div class="col-span-1 text-center text-zinc-400">1 pcs</div>
+                            <div class="col-span-2 text-right text-zinc-400">Rp 17.500</div>
+                            <div class="col-span-2 text-right font-bold text-white">Rp 17.500</div>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-1 sm:gap-0 text-zinc-300">
-                        <div class="sm:col-span-2 text-zinc-500 font-medium">8999909012</div>
-                        <div class="sm:col-span-5 font-semibold text-white">Beras Premium Ramos 5kg</div>
-                        <div class="sm:col-span-1 sm:text-center text-zinc-400">1 sak</div>
-                        <div class="sm:col-span-2 sm:text-right text-zinc-400">Rp 72.500</div>
-                        <div class="sm:col-span-2 sm:text-right font-bold text-white">Rp 72.500</div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-1 sm:gap-0 text-zinc-300">
-                        <div class="sm:col-span-2 text-zinc-500 font-medium">8991001004</div>
-                        <div class="sm:col-span-5 font-semibold text-white">Gula Pasir Gulaku 1kg</div>
-                        <div class="sm:col-span-1 sm:text-center text-zinc-400">1 pcs</div>
-                        <div class="sm:col-span-2 sm:text-right text-zinc-400">Rp 17.500</div>
-                        <div class="sm:col-span-2 sm:text-right font-bold text-white">Rp 17.500</div>
-                    </div>
                 </div>
 
                 <!-- Total & Calculation Ribbon -->
@@ -486,7 +518,7 @@
 ======================================================================= -->
 <section class="py-16 bg-zinc-50/60 border-b border-zinc-100">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
-        <div class="bg-white rounded-3xl p-8 sm:p-10 border border-zinc-200/80 shadow-sm text-center">
+        <div class="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-sm text-center">
             <span class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full inline-block mb-3">
                 Database Ringan &amp; Bandel
             </span>
@@ -852,7 +884,7 @@
 <section id="demo-form" class="scroll-mt-20 py-20 sm:py-28 bg-zinc-50/60">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
         
-        <div class="bg-white rounded-3xl p-8 sm:p-12 border border-zinc-200/80 shadow-card">
+        <div class="bg-white rounded-3xl p-6 sm:p-12 border border-zinc-200/80 shadow-card">
             
             <div class="text-center max-w-xl mx-auto mb-10">
                 <span class="text-xs font-bold uppercase tracking-wider text-black bg-zinc-100 px-3 py-1 rounded-full inline-block mb-3">
