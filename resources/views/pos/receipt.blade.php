@@ -36,10 +36,10 @@
     <div class="receipt-box w-full max-w-[340px] bg-white p-6 rounded-2xl shadow-md border border-slate-200">
         <!-- Store Header -->
         <div class="text-center mb-4 pb-3 border-b border-dashed border-slate-300">
-            <h2 class="text-base font-black tracking-tight uppercase">JAYA MAJU POS</h2>
-            <p class="text-[11px] text-slate-600 mt-0.5">Solusi Mesin Kasir & Perlengkapan Bisnis</p>
-            <p class="text-[10px] text-slate-500">Jl. Babarsari No. 12, Sleman, Yogyakarta</p>
-            <p class="text-[10px] text-slate-500">WhatsApp: 0812-3456-7890</p>
+            <h2 class="text-base font-black tracking-tight uppercase">MITRA SETIA POS</h2>
+            <p class="text-[11px] text-slate-600 mt-0.5">Software & Mesin Kasir Minimarket</p>
+            <p class="text-[10px] text-slate-500">Yogyakarta, Indonesia</p>
+            <p class="text-[10px] text-slate-500">WhatsApp: {{ config('shop.whatsapp_number', '081915444983') }}</p>
         </div>
 
         <!-- Transaction Details -->

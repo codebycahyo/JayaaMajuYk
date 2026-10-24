@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Data Pemesanan - Jaya Maju Yk')
+@section('title', 'Data Pemesanan - Mitra Setia')
 
 @section('content')
 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-h-[75vh]">
@@ -14,8 +14,8 @@
     </nav>
 
     <div class="mb-6 pb-3 border-b border-border-subtle">
-        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Formulir Pemesanan Hardware</h1>
-        <p class="text-xs text-slate-500 mt-1">Lengkapi data tujuan pengiriman untuk verifikasi pemesanan via WhatsApp Admin.</p>
+        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">Formulir Pemesanan Mitra Setia</h1>
+        <p class="text-xs text-slate-500 mt-1">Lengkapi data tujuan pengiriman/instalasi untuk verifikasi pemesanan via WhatsApp Admin.</p>
     </div>
 
     @if (session('error'))

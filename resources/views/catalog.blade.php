@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'Katalog Hardware POS & Mesin Kasir - Jaya Maju Yk')
-@section('description', 'Katalog lengkap printer kasir thermal, barcode scanner, komputer all-in-one, dan laci uang cash drawer bergaransi resmi di Yogyakarta.')
+@section('title', 'Katalog Software & Hardware Mesin Kasir - Mitra Setia')
+@section('description', 'Katalog lengkap software kasir minimarket POS Enterprise, printer thermal, barcode scanner, komputer kasir, dan laci uang cash drawer bergaransi resmi Mitra Setia.')
 
 @section('content')
 <!-- Breadcrumbs & Header -->
@@ -13,9 +13,9 @@
             <span class="text-slate-800 font-semibold">Katalog Produk</span>
         </nav>
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Katalog Hardware Kasir</h1>
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Katalog Software & Hardware Kasir</h1>
             <div class="text-xs text-slate-500">
-                Total: <strong class="text-slate-900 font-bold">{{ $products->total() }}</strong> hardware tersedia
+                Total: <strong class="text-slate-900 font-bold">{{ $products->total() }}</strong> produk tersedia
             </div>
         </div>
     </div>
@@ -54,7 +54,7 @@
 
                     <!-- Category Radio Selection -->
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-2">Kategori Hardware</label>
+                        <label class="block text-xs font-bold text-slate-700 mb-2">Kategori Produk</label>
                         <div class="space-y-1 text-xs">
                             <label class="flex items-center gap-2 p-1.5 rounded hover:bg-slate-50 cursor-pointer">
                                 <input type="radio" name="category" value="Semua" onchange="this.form.submit()" {{ !request('category') || request('category') === 'Semua' ? 'checked' : '' }} class="text-primary focus:ring-primary">
@@ -149,7 +149,7 @@
 
                                 <!-- 1:1 Image Container -->
                                 <a href="{{ route('product.show', $product->id) }}" class="block aspect-square bg-surface-bg rounded-lg p-3 flex items-center justify-center border border-border-subtle mb-3">
-                                    <img src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset($product->image) }}" 
+                                    <img src="{{ Str::startsWith($product->image, ['http://', 'https://', 'data:']) ? $product->image : asset($product->image) }}" 
                                          alt="{{ $product->name }}" 
                                          class="max-h-full max-w-full object-contain"
                                          onerror="this.src='https://placehold.co/300x300?text=Hardware'">

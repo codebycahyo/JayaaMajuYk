@@ -40,7 +40,10 @@ class AdminProductController extends Controller
             if ($request->hasFile('image')) {
                 $uploadedPath = $this->storeProductImage($request->file('image'));
                 $validated['image'] = $uploadedPath;
+            } elseif ($request->filled('image_url')) {
+                $validated['image'] = trim($request->input('image_url'));
             }
+            unset($validated['image_url']);
 
             $validated['is_ready_stock'] = ($validated['stock'] ?? 0) > 0;
 
@@ -94,7 +97,10 @@ class AdminProductController extends Controller
             if ($request->hasFile('image')) {
                 $newUploadedPath = $this->storeProductImage($request->file('image'));
                 $validated['image'] = $newUploadedPath;
+            } elseif ($request->filled('image_url')) {
+                $validated['image'] = trim($request->input('image_url'));
             }
+            unset($validated['image_url']);
 
             $validated['is_ready_stock'] = ($validated['stock'] ?? 0) > 0;
 
@@ -195,22 +201,32 @@ class AdminProductController extends Controller
 
     private function storeProductImage(UploadedFile $file): string
     {
-        $extension = $file->guessExtension() ?: 'jpg';
-        $safeFileName = Str::uuid() . '.' . $extension;
-        $targetDir = public_path('assets/products');
+        $extension = strtolower($file->guessExtension() ?: 'jpg');
+        $mime = $file->getMimeType() ?: 'image/' . $extension;
+        $contents = file_get_contents($file->getRealPath());
 
-        if (!is_dir($targetDir)) {
-            @mkdir($targetDir, 0755, true);
+        // Simpan sebagai Data URI Base64 agar gambar tersimpan permanen di database MySQL (Wasmer Edge)
+        $base64 = base64_encode($contents);
+        $dataUri = "data:{$mime};base64,{$base64}";
+
+        // Simpan juga salinan file fisik di public/assets/products jika filesystem mengizinkan
+        try {
+            $safeFileName = Str::uuid() . '.' . $extension;
+            $targetDir = public_path('assets/products');
+            if (!is_dir($targetDir)) {
+                @mkdir($targetDir, 0755, true);
+            }
+            @file_put_contents($targetDir . '/' . $safeFileName, $contents);
+        } catch (\Throwable $e) {
+            // Abaikan kesalahan penulisan disk pada lingkungan serverless/read-only
         }
 
-        $file->move($targetDir, $safeFileName);
-
-        return 'assets/products/' . $safeFileName;
+        return $dataUri;
     }
 
     private function deleteImageFile(?string $relativePath): void
     {
-        if (!$relativePath || Str::startsWith($relativePath, ['http://', 'https://'])) {
+        if (!$relativePath || Str::startsWith($relativePath, ['http://', 'https://', 'data:'])) {
             return;
         }
 

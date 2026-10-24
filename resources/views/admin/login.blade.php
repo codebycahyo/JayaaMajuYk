@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login - Jaya Maju</title>
+    <title>Admin Login - Mitra Setia</title>
     <style>
         :root { --primary: #0E3481; }
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif; }
@@ -21,7 +21,7 @@
     <div class="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
         <div class="text-center mb-8">
             <h1 class="text-3xl font-black text-slate-900">Admin Login</h1>
-            <p class="text-slate-500 mt-2 text-sm">Masuk untuk mengelola katalog produk Jaya Maju POS</p>
+            <p class="text-slate-500 mt-2 text-sm">Masuk untuk mengelola katalog produk Mitra Setia POS</p>
         </div>
 
         @if (session('error'))

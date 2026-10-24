@@ -21,9 +21,19 @@ class StoreProductRequest extends FormRequest
             'original_price' => ['nullable', 'integer', 'min:0'],
             'stock' => ['required', 'integer', 'min:0'],
             'description' => ['required', 'string', 'max:5000'],
-            'image' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image_url' => ['nullable', 'url', 'max:1000'],
             'specs_raw' => ['nullable', 'string', 'max:5000'],
         ];
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            if (!$this->hasFile('image') && empty($this->input('image_url'))) {
+                $validator->errors()->add('image', 'Silakan unggah file gambar produk ATAU masukkan tautan URL gambar.');
+            }
+        });
     }
 
     public function messages(): array

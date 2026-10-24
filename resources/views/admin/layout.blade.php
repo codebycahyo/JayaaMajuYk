@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard') - Jaya Maju POS</title>
+    <title>@yield('title', 'Admin Dashboard') - Mitra Setia POS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
@@ -26,11 +26,11 @@
             <div class="p-6 border-b border-slate-800">
                 <div class="flex items-center gap-3">
                     <div class="size-9 bg-primary rounded-lg flex items-center justify-center font-bold text-sm text-white">
-                        JM
+                        MS
                     </div>
                     <div>
-                        <h1 class="text-base font-bold tracking-tight leading-none text-white">JAYA MAJU YK</h1>
-                        <p class="text-slate-400 text-[11px] mt-0.5">Sistem Admin & Kasir</p>
+                        <h1 class="text-base font-bold tracking-tight leading-none text-white">MITRA SETIA</h1>
+                        <p class="text-slate-400 text-[11px] mt-0.5">Software & Mesin Kasir</p>
                     </div>
                 </div>
 

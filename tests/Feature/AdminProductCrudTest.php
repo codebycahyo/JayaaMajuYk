@@ -77,7 +77,8 @@ class AdminProductCrudTest extends TestCase
         $this->assertEquals(1650000, $this->product->fresh()->price);
         $this->assertEquals(20, $this->product->fresh()->stock);
         $this->assertEquals(['Kecepatan' => '200mm/s', 'Koneksi' => 'USB'], $this->product->fresh()->specs);
-        $this->assertStringContainsString('assets/products/', $this->product->fresh()->image);
+        $image = $this->product->fresh()->image;
+        $this->assertTrue(str_starts_with($image, 'data:image/') || str_contains($image, 'assets/products/'));
     }
 
     public function test_admin_can_delete_product(): void

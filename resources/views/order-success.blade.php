@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Menghubungkan ke WhatsApp - Jaya Maju POS')
+@section('title', 'Menghubungkan ke WhatsApp - Mitra Setia')
 
 @section('content')
 <div class="bg-slate-50/50 py-8 sm:py-12 min-h-[85vh] flex items-center justify-center">

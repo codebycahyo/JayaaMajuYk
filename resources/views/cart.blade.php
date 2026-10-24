@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Keranjang Belanja - Jaya Maju Yk')
+@section('title', 'Keranjang Belanja - Mitra Setia')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-h-[75vh]">
@@ -19,7 +19,7 @@
                 <span class="material-symbols-outlined text-primary text-2xl">shopping_cart</span>
                 <span>Keranjang Belanja</span>
             </h1>
-            <p class="text-xs text-slate-500 mt-1">Periksa daftar pesanan hardware POS Anda sebelum lanjut ke pengisian data.</p>
+            <p class="text-xs text-slate-500 mt-1">Periksa daftar pesanan software & hardware POS Anda sebelum lanjut ke pengisian data.</p>
         </div>
         @if (!empty($cart))
             <form action="{{ route('cart.clear') }}" method="POST" onsubmit="return confirm('Kosongkan keranjang belanja?')">
@@ -36,11 +36,11 @@
         <div class="bg-white rounded-xl border border-border-subtle p-12 text-center max-w-lg mx-auto">
             <span class="material-symbols-outlined text-5xl text-slate-300 mb-2">remove_shopping_cart</span>
             <h2 class="text-base font-bold text-slate-800">Keranjang Belanja Anda Kosong</h2>
-            <p class="text-xs text-slate-500 mt-1">Pilih perangkat kasir, printer thermal, atau scanner barcode dari katalog kami.</p>
+            <p class="text-xs text-slate-500 mt-1">Pilih software kasir, paket usaha, printer thermal, atau scanner barcode dari katalog kami.</p>
             <div class="mt-6">
                 <a href="{{ route('catalog') }}" class="h-11 px-5 bg-primary hover:bg-primary-dark text-white rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition-colors shadow-xs">
                     <span class="material-symbols-outlined text-base">storefront</span>
-                    <span>Buka Katalog Hardware</span>
+                    <span>Buka Katalog Produk</span>
                 </a>
             </div>
         </div>
@@ -53,10 +53,10 @@
                         <div class="py-4 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                             <div class="flex items-center gap-3">
                                 <div class="size-16 rounded-lg bg-surface-bg border border-border-subtle p-1.5 shrink-0 flex items-center justify-center">
-                                    <img src="{{ Str::startsWith($item['image'], 'http') ? $item['image'] : asset($item['image']) }}" 
+                                    <img src="{{ Str::startsWith($item['image'], ['http://', 'https://', 'data:']) ? $item['image'] : asset($item['image']) }}" 
                                          alt="{{ $item['name'] }}" 
                                          class="max-h-full max-w-full object-contain"
-                                         onerror="this.src='https://placehold.co/100x100?text=HW'">
+                                         onerror="this.src='https://placehold.co/100x100?text=Produk'">
                                 </div>
                                 <div>
                                     <a href="{{ route('product.show', $id) }}" class="font-bold text-slate-900 hover:text-primary transition-colors text-xs sm:text-sm line-clamp-1">

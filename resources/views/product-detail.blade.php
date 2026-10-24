@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', $product->name . ' - Hardware POS Jaya Maju Yk')
-@section('description', 'Beli ' . $product->name . ' harga resmi Rp ' . number_format($product->price, 0, ',', '.') . '. Distributor hardware mesin kasir di Yogyakarta bergaransi resmi 1 tahun.')
+@section('title', $product->name . ' - Mitra Setia')
+@section('description', 'Beli ' . $product->name . ' harga resmi Rp ' . number_format($product->price, 0, ',', '.') . '. Software & Hardware Mesin Kasir Minimarket Mitra Setia bergaransi resmi.')
 
 @push('structured-data')
 <script type="application/ld+json">
@@ -10,13 +10,13 @@
   "@type": "Product",
   "name": "{{ $product->name }}",
   "image": [
-    "{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset($product->image) }}"
+    "{{ Str::startsWith($product->image, ['http://', 'https://', 'data:']) ? $product->image : asset($product->image) }}"
   ],
   "description": "{{ strip_tags($product->description) }}",
   "sku": "{{ $product->id }}",
   "brand": {
     "@type": "Brand",
-    "name": "Jaya Maju Yk"
+    "name": "Mitra Setia"
   },
   "offers": {
     "@type": "Offer",
@@ -49,7 +49,7 @@
             <div class="aspect-square rounded-xl bg-white border border-border-subtle p-6 flex items-center justify-center relative shadow-xs">
                 <img 
                     id="mainProductImage"
-                    src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset($product->image) }}" 
+                    src="{{ Str::startsWith($product->image, ['http://', 'https://', 'data:']) ? $product->image : asset($product->image) }}" 
                     alt="{{ $product->name }}"
                     class="max-h-full max-w-full object-contain"
                 >
@@ -89,7 +89,7 @@
         <div class="lg:col-span-6 space-y-5">
             <div>
                 <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                    Hardware Resmi Jaya Maju Yk
+                    Produk Resmi Mitra Setia
                 </span>
                 <h1 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
                     {{ $product->name }}

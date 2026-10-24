@@ -21,6 +21,7 @@ class UpdateProductRequest extends FormRequest
             'stock' => ['required', 'integer', 'min:0'],
             'description' => ['required', 'string', 'max:5000'],
             'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,webp', 'max:2048'],
+            'image_url' => ['nullable', 'url', 'max:1000'],
             'specs_raw' => ['nullable', 'string', 'max:5000'],
         ];
     }

@@ -79,7 +79,7 @@
                         Kategori <span class="text-red-500">*</span>
                     </label>
                     @php
-                        $availableCategories = ['Printer Kasir', 'Barcode Scanner', 'Komputer Kasir', 'Paket Usaha'];
+                        $availableCategories = ['Software Kasir', 'Paket Usaha', 'Komputer Kasir', 'Printer Kasir', 'Barcode Scanner'];
                         if (isset($product) && $product->category && !in_array($product->category, $availableCategories)) {
                             $availableCategories[] = $product->category;
                         }
@@ -159,22 +159,41 @@
                     <label class="block text-sm font-bold text-slate-700 mb-2">
                         Gambar Produk {{ isset($product) ? '(Opsional)' : '*' }}
                     </label>
-                    <div class="flex items-center gap-6 p-4 bg-slate-50 rounded-2xl border @error('image') border-red-500 @else border-slate-200 @enderror">
-                        @if(isset($product) && $product->image)
-                            <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset($product->image) }}" class="size-20 object-contain bg-white p-1 rounded-xl shadow-sm border border-slate-200" alt="Preview Gambar">
-                        @endif
-                        <div class="flex-1">
+                    <div class="p-5 bg-slate-50 rounded-2xl border @error('image') border-red-500 @elseif($errors->has('image_url')) border-red-500 @else border-slate-200 @enderror space-y-4">
+                        <div class="flex items-center gap-6">
+                            @if(isset($product) && $product->image)
+                                <img src="{{ Str::startsWith($product->image, ['http://', 'https://', 'data:']) ? $product->image : asset($product->image) }}" class="size-20 object-contain bg-white p-1 rounded-xl shadow-sm border border-slate-200" alt="Preview Gambar">
+                            @endif
+                            <div class="flex-1">
+                                <label class="block text-xs font-bold text-slate-600 mb-1">Opsi A: Upload File Gambar (Otomatis disimpan permanen)</label>
+                                <input 
+                                    type="file" 
+                                    name="image" 
+                                    id="image_file_input"
+                                    accept="image/jpeg,image/png,image/jpg,image/webp" 
+                                    class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary file:text-white hover:file:bg-opacity-90 cursor-pointer" 
+                                    {{ isset($product) ? '' : '' }}
+                                >
+                                <p class="text-[11px] text-slate-400 mt-1">Format: JPG, PNG, WebP. Maksimal 2 MB. {{ isset($product) ? 'Biarkan kosong jika tidak ingin mengganti.' : '' }}</p>
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-200 pt-3">
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Opsi B: Atau Tempel URL Gambar / Data URI</label>
                             <input 
-                                type="file" 
-                                name="image" 
-                                accept="image/jpeg,image/png,image/jpg,image/webp" 
-                                class="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-primary file:text-white hover:file:bg-opacity-90 cursor-pointer" 
-                                {{ isset($product) ? '' : 'required' }}
+                                type="text" 
+                                name="image_url" 
+                                value="{{ old('image_url', (isset($product) && Str::startsWith($product->image, ['http://', 'https://'])) ? $product->image : '') }}" 
+                                class="w-full px-4 py-2 text-sm rounded-xl border border-slate-200 focus:outline-none focus:border-primary font-medium text-slate-800 bg-white" 
+                                placeholder="https://contoh.com/gambar-produk.jpg"
                             >
-                            <p class="text-[11px] text-slate-400 mt-1">Format: JPG, PNG, WebP. Maksimal 2 MB. {{ isset($product) ? 'Biarkan kosong jika tidak ingin mengganti.' : '' }}</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Gunakan ini jika ingin memakai URL langsung dari internet atau hosting cloud.</p>
                         </div>
                     </div>
                     @error('image')
+                        <p class="text-xs text-red-500 mt-1 font-semibold">{{ $message }}</p>
+                    @enderror
+                    @error('image_url')
                         <p class="text-xs text-red-500 mt-1 font-semibold">{{ $message }}</p>
                     @enderror
                 </div>

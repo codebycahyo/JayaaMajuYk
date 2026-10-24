@@ -38,7 +38,7 @@
                         <div class="flex items-center gap-4">
                             <div class="size-12 rounded-lg bg-slate-100 border border-slate-200 p-1 flex-shrink-0 flex items-center justify-center">
                                 @if($product->image)
-                                    <img src="{{ Str::startsWith($product->image, ['http://', 'https://']) ? $product->image : asset($product->image) }}" class="w-full h-full object-contain" alt="{{ $product->name }}">
+                                    <img src="{{ Str::startsWith($product->image, ['http://', 'https://', 'data:']) ? $product->image : asset($product->image) }}" class="w-full h-full object-contain" alt="{{ $product->name }}">
                                 @else
                                     <span class="material-symbols-outlined text-slate-300">image</span>
                                 @endif

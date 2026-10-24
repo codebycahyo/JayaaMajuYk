@@ -12,7 +12,10 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $jsonPath = base_path('_backup/data/products.json');
+        $jsonPath = base_path('database/data/products.json');
+        if (!file_exists($jsonPath)) {
+            $jsonPath = base_path('_backup/data/products.json');
+        }
         if (!file_exists($jsonPath)) {
             return;
         }

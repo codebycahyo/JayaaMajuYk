@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesin POS Kasir - Jaya Maju POS</title>
+    <title>Mesin POS Kasir - Mitra Setia POS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
@@ -28,17 +28,17 @@
     <header class="bg-slate-900 text-white px-6 py-3.5 flex items-center justify-between shadow-md z-30">
         <div class="flex items-center gap-4">
             <div class="size-9 bg-primary rounded-xl flex items-center justify-center font-black text-white shadow-md shadow-primary/40">
-                JM
+                MS
             </div>
             <div>
                 <h1 class="text-base font-black tracking-tight leading-none text-white">POINT OF SALE (POS)</h1>
-                <p class="text-slate-400 text-xs mt-0.5">Jaya Maju Toko Peralatan Kasir</p>
+                <p class="text-slate-400 text-xs mt-0.5">Mitra Setia - Software & Mesin Kasir</p>
             </div>
         </div>
 
         <div class="flex items-center gap-4">
             <div class="text-right hidden sm:block">
-                <p class="text-xs font-bold text-white">{{ Auth::user()?->name ?? 'Kasir Jaya Maju' }}</p>
+                <p class="text-xs font-bold text-white">{{ Auth::user()?->name ?? 'Kasir Mitra Setia' }}</p>
                 <p class="text-[10px] text-emerald-400 uppercase font-black tracking-wider">{{ Auth::user()?->role ?? 'STAFF' }} ON DUTY</p>
             </div>
 
@@ -105,7 +105,7 @@
                             <div>
                                 <div class="w-full h-28 bg-slate-50 rounded-xl mb-3 p-2 flex items-center justify-center border border-slate-100 overflow-hidden">
                                     @if($p->image)
-                                        <img src="{{ Str::startsWith($p->image, ['http://', 'https://']) ? $p->image : asset($p->image) }}" class="max-h-full max-w-full object-contain" alt="{{ $p->name }}">
+                                        <img src="{{ Str::startsWith($p->image, ['http://', 'https://', 'data:']) ? $p->image : asset($p->image) }}" class="max-h-full max-w-full object-contain" alt="{{ $p->name }}">
                                     @else
                                         <span class="material-symbols-outlined text-4xl text-slate-300">image</span>
                                     @endif

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Perbandingan Hardware POS - Jaya Maju Yk')
+@section('title', 'Perbandingan Produk Kasir - Mitra Setia')
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-h-[75vh]">
@@ -10,17 +10,17 @@
         <span>/</span>
         <a href="{{ route('catalog') }}" class="hover:text-primary transition-colors">Katalog</a>
         <span>/</span>
-        <span class="text-slate-800 font-semibold">Bandingkan Hardware</span>
+        <span class="text-slate-800 font-semibold">Bandingkan Produk</span>
     </nav>
 
     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-border-subtle">
         <div>
             <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary text-2xl">compare_arrows</span>
-                <span>Perbandingan Spesifikasi Hardware</span>
+                <span>Perbandingan Spesifikasi Produk</span>
             </h1>
             <p class="text-xs text-slate-500 mt-1">
-                Bandingkan port koneksi, kecepatan cetak, dan dimensi perangkat kasir berdampingan.
+                Bandingkan spesifikasi teknis software dan perangkat kasir secara berdampingan.
             </p>
         </div>
         @if ($compareProducts->isNotEmpty())
@@ -67,9 +67,9 @@
 
                                         <div class="w-full h-32 bg-white rounded-lg p-2 flex items-center justify-center border border-border-subtle">
                                             <img class="max-w-full max-h-full object-contain" 
-                                                 src="{{ Str::startsWith($product->image, 'http') ? $product->image : asset($product->image) }}" 
+                                                 src="{{ Str::startsWith($product->image, ['http://', 'https://', 'data:']) ? $product->image : asset($product->image) }}" 
                                                  alt="{{ $product->name }}"
-                                                 onerror="this.src='https://placehold.co/200x200?text=Hardware'">
+                                                 onerror="this.src='https://placehold.co/200x200?text=Produk'">
                                         </div>
 
                                         <div>
