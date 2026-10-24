@@ -134,7 +134,7 @@
             </a>
 
             <!-- Center: Desktop Navigation Links -->
-            <nav class="hidden md:flex items-center gap-7 text-xs font-medium text-zinc-600">
+            <nav class="hidden md:flex items-center gap-8 text-xs font-medium text-zinc-600">
                 <a href="{{ route('home') }}" class="transition-colors hover:text-zinc-950 {{ request()->routeIs('home') ? 'text-zinc-950 font-semibold' : '' }}">
                     Beranda
                 </a>
@@ -149,13 +149,6 @@
                 </a>
                 <a href="#testimoni" class="transition-colors hover:text-zinc-950">
                     Testimoni
-                </a>
-                <a href="{{ route('order.track') }}" class="transition-colors hover:text-zinc-950 {{ request()->routeIs('order.track') ? 'text-zinc-950 font-semibold' : '' }}">
-                    Lacak Pesanan
-                </a>
-                <a href="{{ route('pos.index') }}" class="px-2.5 py-1 rounded-full bg-zinc-50 hover:bg-zinc-100 border border-zinc-200 text-zinc-800 text-[11px] font-semibold inline-flex items-center gap-1.5 transition-colors">
-                    <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Terminal POS
                 </a>
             </nav>
 
@@ -223,16 +216,6 @@
                 </a>
                 <a href="#testimoni" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg hover:bg-zinc-50">
                     Testimoni Pelanggan
-                </a>
-                <a href="{{ route('order.track') }}" class="block px-3 py-2 rounded-lg hover:bg-zinc-50">
-                    Lacak Pesanan
-                </a>
-                <a href="{{ route('pos.index') }}" class="flex items-center justify-between px-3 py-2 rounded-lg bg-zinc-50 border border-zinc-200/80 text-zinc-900 font-semibold text-xs mt-2">
-                    <span class="flex items-center gap-2">
-                        <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span>Buka Terminal Kasir (POS)</span>
-                    </span>
-                    <span class="material-symbols-outlined text-sm">open_in_new</span>
                 </a>
 
                 <div class="pt-4 mt-3 border-t border-zinc-100 space-y-2">
