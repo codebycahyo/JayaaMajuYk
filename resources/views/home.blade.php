@@ -213,19 +213,88 @@
 
 
 <!-- =======================================================================
-     2. LARGE EDITORIAL STATEMENT (CLEAN WHITE SPACE)
+     2. ASYMMETRIC EDITORIAL STATEMENT & 10+ YEARS EXPERIENCE
 ======================================================================= -->
-<section class="py-20 sm:py-28 bg-white border-b border-zinc-100 text-center">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6">
-        <span class="text-xs font-bold uppercase tracking-widest text-zinc-400 block mb-4">
-            PENGALAMAN 10+ TAHUN
-        </span>
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-black leading-snug tracking-tight">
-            Kebanyakan software kasir membebani biaya bulanan dan sulit dipelajari staf baru. POS Enterprise dirancang sebaliknya: sekali beli, mudah digunakan, dan operasional kilat tanpa mouse.
-        </h2>
-        <p class="text-sm sm:text-base text-zinc-500 mt-6 leading-relaxed max-w-2xl mx-auto">
-            Berpengalaman lebih dari 10 tahun mendampingi pelaku usaha dari berbagai jenis bisnis, mulai dari toko kelontong, toko pakaian, toko buku, hingga toko bahan bangunan. POS Enterprise terus melakukan pengembangan sehingga fitur-fitur yang tersedia dapat memenuhi kebutuhan pengguna dan sesuai dengan perkembangan jaman yang dinamis.
-        </p>
+<section class="py-20 sm:py-28 bg-white border-b border-zinc-100">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            
+            <!-- Left Column: Big Metric & Trust Anchors (Col 5) -->
+            <div class="lg:col-span-5 bg-zinc-50/70 p-7 sm:p-9 rounded-3xl border border-zinc-200/80">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-zinc-200 text-zinc-800 text-xs font-semibold mb-6 shadow-xs">
+                    <span class="size-2 rounded-full bg-emerald-500"></span>
+                    <span>Pengalaman Teruji Sejak 2014</span>
+                </span>
+                
+                <div class="flex items-baseline gap-2 mb-3">
+                    <span class="text-6xl sm:text-7xl font-extrabold text-black tracking-tight leading-none">10+</span>
+                    <span class="text-2xl sm:text-3xl font-extrabold text-emerald-600 tracking-tight">Tahun</span>
+                </div>
+                
+                <h3 class="text-base sm:text-lg font-bold text-zinc-950 mb-3 leading-snug">
+                    Mendampingi &amp; mempercepat transaksi ratusan pemilik toko di Indonesia.
+                </h3>
+                
+                <p class="text-xs sm:text-sm text-zinc-500 leading-relaxed mb-6">
+                    Sistem POS Enterprise telah matang teruji melewati berbagai pembaruan alur kasir, stabil tanpa koneksi internet (*offline ready*), dan database ringan tanpa perlu spek komputer mahal.
+                </p>
+
+                <!-- Retail Types Supported -->
+                <div class="pt-6 border-t border-zinc-200/80">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-3">
+                        Fleksibel Untuk Segala Jenis Usaha:
+                    </span>
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-zinc-800 font-medium">Toko Kelontong &amp; Sembako</span>
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-zinc-800 font-medium">Minimarket &amp; Swalayan</span>
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-zinc-800 font-medium">Toko Pakaian &amp; Butik</span>
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-zinc-800 font-medium">Toko Bahan Bangunan</span>
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-zinc-800 font-medium">Toko Buku &amp; ATK</span>
+                        <span class="px-3 py-1.5 rounded-full bg-white border border-zinc-200/90 text-zinc-800 font-medium">Apotek &amp; Grosir</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Dual-Tone Headline & Editorial Story (Col 7) -->
+            <div class="lg:col-span-7 flex flex-col justify-center lg:pt-2">
+                
+                <!-- Dual-tone Headline: Contrast between Market Flaw vs Solution -->
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-[1.2] tracking-tight mb-6">
+                    <span class="text-zinc-400 block mb-2 font-bold text-xl sm:text-2xl lg:text-3xl">
+                        Kebanyakan software kasir membebani biaya bulanan dan sulit dipelajari staf baru.
+                    </span>
+                    <span class="text-black block">
+                        POS Enterprise dirancang sebaliknya: sekali beli, mudah digunakan, dan operasional kilat tanpa klik mouse.
+                    </span>
+                </h2>
+
+                <p class="text-sm sm:text-base text-zinc-600 leading-relaxed mb-6">
+                    Berpengalaman lebih dari 10 tahun mendampingi pelaku usaha dari berbagai jenis bisnis, mulai dari toko kelontong, toko pakaian, toko buku, hingga toko bahan bangunan. POS Enterprise terus melakukan pengembangan sehingga fitur-fitur yang tersedia dapat memenuhi kebutuhan pengguna dan sesuai dengan perkembangan jaman yang dinamis.
+                </p>
+
+                <!-- 4 Value Checkmarks -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-6 border-t border-zinc-100 text-xs">
+                    <div class="flex items-center gap-2.5 font-bold text-zinc-900">
+                        <span class="material-symbols-outlined text-emerald-600 text-lg">check_circle</span>
+                        <span>Bayar 1x Pakai Selamanya</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 font-bold text-zinc-900">
+                        <span class="material-symbols-outlined text-emerald-600 text-lg">check_circle</span>
+                        <span>Full Shortcut Keyboard (Tanpa Mouse)</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 font-bold text-zinc-900">
+                        <span class="material-symbols-outlined text-emerald-600 text-lg">check_circle</span>
+                        <span>Database Ringan &amp; Offline Ready</span>
+                    </div>
+                    <div class="flex items-center gap-2.5 font-bold text-zinc-900">
+                        <span class="material-symbols-outlined text-emerald-600 text-lg">check_circle</span>
+                        <span>Garansi 6 Bulan &amp; Free Training 3x</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
 </section>
 
