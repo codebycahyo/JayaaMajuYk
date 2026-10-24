@@ -114,104 +114,189 @@
 </head>
 <body class="bg-white text-ink min-h-screen flex flex-col font-sans">
 
-    <!-- Top Notice Strip: Ultra Minimalist -->
-    <div class="bg-zinc-50 border-b border-zinc-100 text-[12px] py-2 px-4 sm:px-6 text-zinc-600 font-medium">
-        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-2">
-                <span class="inline-flex items-center justify-center size-2 rounded-full bg-emerald-500"></span>
-                <span>Software Kasir Minimarket Mitra Setia &bull; <strong>Bayar 1x Pakai Selamanya</strong> (Tanpa Langganan)</span>
+    <!-- Top Utility Announcement Strip (Clean, Professional, Functional) -->
+    <div class="bg-zinc-950 text-zinc-300 text-[11px] sm:text-xs py-2 px-4 sm:px-6 border-b border-zinc-900 font-medium">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
+                    <span class="size-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Lisensi Resmi Beli Putus
+                </span>
+                <span class="text-zinc-700 hidden md:inline">|</span>
+                <span class="text-zinc-400 hidden md:inline">Bayar 1x Pakai Selamanya &bull; Bebas Biaya Langganan Bulanan &bull; Garansi 6 Bulan</span>
             </div>
-            <div class="flex items-center gap-4 text-zinc-500 text-[11px] sm:text-xs">
-                <a href="#demo-form" class="text-zinc-900 font-semibold hover:underline">
-                    Coba Gratis 30 Hari
+            <div class="flex items-center gap-5 text-zinc-400 text-[11px] sm:text-xs">
+                <a href="{{ route('order.track') }}" class="hover:text-white transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">local_shipping</span>
+                    <span>Lacak Pesanan</span>
                 </a>
-                <span>&bull;</span>
-                <a href="{{ route('order.track') }}" class="hover:text-zinc-900 transition-colors">
-                    Lacak Pesanan
-                </a>
-                <span>&bull;</span>
-                <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="text-emerald-700 font-semibold hover:underline">
-                    WA: 0812-3456-7890
+                <span class="text-zinc-700">&bull;</span>
+                <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="text-zinc-300 hover:text-emerald-400 transition-colors flex items-center gap-1 font-medium">
+                    <span class="material-symbols-outlined text-sm text-emerald-400">support_agent</span>
+                    <span>Helpdesk WA: 0812-3456-7890</span>
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Navigation Bar: Clean White Minimalist -->
-    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-zinc-100">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4">
-            <!-- Brand Logo -->
-            <a href="{{ route('home') }}" class="flex items-center gap-2.5 focus:outline-none">
-                <div class="size-8 rounded-lg bg-black text-white flex items-center justify-center font-bold text-sm tracking-tight">
-                    MS
+    <!-- Main Navigation Bar: Modern Corporate & High-End Tech Aesthetic -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-zinc-200/80 transition-shadow duration-200" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 sm:h-20 flex items-center justify-between gap-6">
+            
+            <!-- Left: Brand Logo & Identity -->
+            <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 focus:outline-none group">
+                <div class="size-10 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-extrabold text-sm tracking-tight shadow-md shadow-zinc-900/10 group-hover:bg-zinc-800 transition-colors">
+                    <svg class="size-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M19 2H5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm0 18H5V4h14v16zM7 7h10v2H7V7zm0 4h10v2H7v-2zm0 4h7v2H7v-2z"/>
+                    </svg>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-extrabold text-base tracking-tight text-black leading-none">
-                        Mitra Setia
-                    </span>
-                    <span class="text-[10px] text-zinc-400 font-medium mt-0.5">Software &amp; Mesin Kasir</span>
+                    <div class="flex items-center gap-1.5">
+                        <span class="font-extrabold text-lg sm:text-xl tracking-tight text-zinc-950 leading-none">
+                            Mitra Setia
+                        </span>
+                        <span class="text-[9px] font-bold uppercase tracking-wider bg-zinc-100 text-zinc-700 px-1.5 py-0.5 rounded">
+                            POS
+                        </span>
+                    </div>
+                    <span class="text-[11px] text-zinc-400 font-medium leading-tight mt-0.5">Software &amp; Mesin Kasir Toko</span>
                 </div>
             </a>
 
-            <!-- Desktop Nav Links: Modern Minimalist -->
-            <nav class="hidden lg:flex items-center gap-7 text-[13px] font-medium text-zinc-600">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-black font-semibold' : 'hover:text-black transition-colors' }}">
+            <!-- Center: Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-[13px] font-semibold text-zinc-600">
+                <a href="{{ route('home') }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request()->routeIs('home') ? 'text-zinc-950 bg-zinc-100/80 font-bold' : 'hover:text-zinc-950 hover:bg-zinc-50' }}">
                     Beranda
                 </a>
-                <a href="{{ route('catalog') }}" class="{{ request()->routeIs('catalog') ? 'text-black font-semibold' : 'hover:text-black transition-colors' }}">
-                    Katalog
+                <a href="{{ route('catalog') }}" class="px-3.5 py-2 rounded-lg transition-colors {{ request()->routeIs('catalog') ? 'text-zinc-950 bg-zinc-100/80 font-bold' : 'hover:text-zinc-950 hover:bg-zinc-50' }}">
+                    Katalog Produk
                 </a>
-                <a href="#fitur-software" class="hover:text-black transition-colors">
+                <a href="#fitur-software" class="px-3.5 py-2 rounded-lg hover:text-zinc-950 hover:bg-zinc-50 transition-colors">
                     Fitur Software
                 </a>
-                <a href="#keunggulan" class="hover:text-black transition-colors">
-                    Kenapa Kami
+                <a href="#keunggulan" class="px-3.5 py-2 rounded-lg hover:text-zinc-950 hover:bg-zinc-50 transition-colors">
+                    Nilai Investasi
                 </a>
-                <a href="#testimoni" class="hover:text-black transition-colors">
+                <a href="#testimoni" class="px-3.5 py-2 rounded-lg hover:text-zinc-950 hover:bg-zinc-50 transition-colors">
                     Testimoni
                 </a>
-                <a href="{{ route('pos.index') }}" class="px-3 py-1.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors">
-                    <span class="size-1.5 rounded-full bg-emerald-500"></span>
-                    Terminal Kasir
+                <a href="{{ route('pos.index') }}" class="ml-1 px-3 py-1.5 rounded-lg border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 text-zinc-800 text-xs font-bold inline-flex items-center gap-2 transition-colors">
+                    <span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Terminal POS
                 </a>
             </nav>
 
-            <!-- Actions: Pill Buttons -->
-            <div class="flex items-center gap-3">
-                <a href="#demo-form" class="h-9 px-4.5 bg-black hover:bg-zinc-800 text-white rounded-full text-xs font-semibold inline-flex items-center justify-center transition-all shadow-xs">
-                    Coba Gratis 30 Hari
-                </a>
-
-                <!-- Cart Button -->
-                <a href="{{ route('cart') }}" class="size-9 rounded-full flex items-center justify-center text-zinc-700 hover:bg-zinc-100 relative transition-colors" title="Keranjang Belanja">
-                    <span class="material-symbols-outlined text-xl">shopping_bag</span>
+            <!-- Right: Action Center (Cart, Staff, Demo CTA & Mobile Toggle) -->
+            <div class="flex items-center gap-2.5 sm:gap-3.5">
+                
+                <!-- Cart Button with Refined Pill & Counter -->
+                <a href="{{ route('cart') }}" class="h-10 px-3 rounded-full border border-zinc-200 hover:border-zinc-300 text-zinc-700 hover:text-zinc-950 flex items-center gap-2 transition-colors relative" title="Keranjang Belanja">
+                    <span class="material-symbols-outlined text-lg">shopping_cart</span>
+                    <span class="text-xs font-semibold hidden sm:inline">Keranjang</span>
                     @php 
                         $cart_count = session('cart') ? array_sum(array_column(session('cart'), 'qty')) : 0;
                     @endphp
                     @if($cart_count > 0)
-                        <span class="absolute -top-0.5 -right-0.5 size-4 bg-black text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                        <span class="size-5 bg-zinc-950 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
                             {{ $cart_count }}
                         </span>
                     @endif
                 </a>
 
-                <!-- Staff/Admin Button -->
-                <div class="pl-1">
+                <!-- Staff/Admin Access -->
+                <div class="hidden sm:block">
                     @auth
-                        <a href="{{ Auth::user()->isAdmin() ? route('admin.products.index') : route('pos.index') }}" class="h-9 px-3.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition-colors">
+                        <a href="{{ Auth::user()->isAdmin() ? route('admin.products.index') : route('pos.index') }}" class="h-10 px-3.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 rounded-full text-xs font-bold inline-flex items-center gap-1.5 transition-colors">
                             <span class="material-symbols-outlined text-sm">badge</span>
-                            <span class="hidden sm:inline">{{ Auth::user()->name }}</span>
+                            <span>{{ Auth::user()->name }}</span>
                         </a>
                     @else
-                        <a href="{{ route('admin.login') }}" class="h-9 px-3 text-zinc-500 hover:text-black rounded-full text-xs font-medium inline-flex items-center gap-1 transition-colors">
-                            <span class="material-symbols-outlined text-sm">lock</span>
-                            <span class="hidden sm:inline">Login</span>
+                        <a href="{{ route('admin.login') }}" class="h-10 px-3.5 text-zinc-600 hover:text-zinc-950 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition-colors">
+                            <span class="material-symbols-outlined text-base">lock</span>
+                            <span>Portal Staf</span>
                         </a>
                     @endauth
                 </div>
+
+                <!-- Primary CTA: High-Contrast Professional Black Pill -->
+                <a href="#demo-form" class="h-10 px-5 bg-zinc-950 hover:bg-zinc-800 text-white rounded-full text-xs font-bold inline-flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow active:scale-[0.98]">
+                    <span>Coba Gratis 30 Hari</span>
+                    <span class="material-symbols-outlined text-sm">east</span>
+                </a>
+
+                <!-- Mobile Hamburger Menu Button -->
+                <button type="button" onclick="toggleMobileMenu()" class="lg:hidden size-10 rounded-xl border border-zinc-200 flex items-center justify-center text-zinc-700 hover:text-zinc-950 hover:bg-zinc-100 focus:outline-none transition-colors" aria-label="Toggle Navigation Menu">
+                    <span id="menu-icon-open" class="material-symbols-outlined text-xl">menu</span>
+                    <span id="menu-icon-close" class="material-symbols-outlined text-xl hidden">close</span>
+                </button>
             </div>
         </div>
+
+        <!-- Mobile Drawer Navigation (Slide-Down & Accessible) -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-zinc-100 bg-white px-4 py-5 shadow-xl transition-all">
+            <nav class="space-y-1 text-sm font-semibold text-zinc-700">
+                <a href="{{ route('home') }}" class="block px-4 py-3 rounded-xl hover:bg-zinc-100 {{ request()->routeIs('home') ? 'bg-zinc-100 text-zinc-950 font-bold' : '' }}">
+                    Beranda
+                </a>
+                <a href="{{ route('catalog') }}" class="block px-4 py-3 rounded-xl hover:bg-zinc-100 {{ request()->routeIs('catalog') ? 'bg-zinc-100 text-zinc-950 font-bold' : '' }}">
+                    Katalog Software &amp; Mesin Kasir
+                </a>
+                <a href="#fitur-software" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl hover:bg-zinc-100">
+                    Fitur POS Enterprise
+                </a>
+                <a href="#keunggulan" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl hover:bg-zinc-100">
+                    Nilai Investasi Toko
+                </a>
+                <a href="#testimoni" onclick="toggleMobileMenu()" class="block px-4 py-3 rounded-xl hover:bg-zinc-100">
+                    Testimoni Pelanggan
+                </a>
+                <a href="{{ route('order.track') }}" class="block px-4 py-3 rounded-xl hover:bg-zinc-100">
+                    Lacak Status Pesanan
+                </a>
+                <a href="{{ route('pos.index') }}" class="flex items-center justify-between px-4 py-3 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900 font-bold">
+                    <span>Buka Terminal Kasir (POS)</span>
+                    <span class="size-2 rounded-full bg-emerald-500"></span>
+                </a>
+
+                <div class="pt-4 mt-3 border-t border-zinc-100 space-y-2">
+                    <a href="#demo-form" onclick="toggleMobileMenu()" class="w-full h-11 bg-zinc-950 text-white rounded-full font-bold text-xs flex items-center justify-center gap-2">
+                        <span>Coba Gratis 30 Hari</span>
+                        <span class="material-symbols-outlined text-sm">download</span>
+                    </a>
+                    
+                    @auth
+                        <a href="{{ Auth::user()->isAdmin() ? route('admin.products.index') : route('pos.index') }}" class="w-full h-10 border border-zinc-200 text-zinc-800 rounded-full font-semibold text-xs flex items-center justify-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm">badge</span>
+                            <span>Dashboard Staf ({{ Auth::user()->name }})</span>
+                        </a>
+                    @else
+                        <a href="{{ route('admin.login') }}" class="w-full h-10 border border-zinc-200 text-zinc-700 rounded-full font-semibold text-xs flex items-center justify-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm">lock</span>
+                            <span>Login Portal Karyawan</span>
+                        </a>
+                    @endauth
+                </div>
+            </nav>
+        </div>
     </header>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const openIcon = document.getElementById('menu-icon-open');
+            const closeIcon = document.getElementById('menu-icon-close');
+            
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                openIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+                openIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+            }
+        }
+    </script>
 
     <!-- Global Alerts -->
     @if(session('success'))
