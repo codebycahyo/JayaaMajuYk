@@ -50,94 +50,58 @@
     </script>
     @stack('structured-data')
 
-    <!-- Typography: Newsreader (Display Serif) + Plus Jakarta Sans (UI & Text) + JetBrains Mono (Data & Ledger) -->
+    <!-- Typography: Plus Jakarta Sans (Clean Minimalist Swiss / High-End SaaS) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 
     <!-- Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
 
-    <!-- Tailwind CSS with Editorial Industrial Ledger Design Tokens -->
+    <!-- Tailwind CSS with Clean White Minimalist Design Tokens -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        'serif': ['Newsreader', 'Georgia', 'Cambria', 'serif'],
-                        'sans': ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
-                        'mono': ['"JetBrains Mono"', 'SFMono-Regular', 'Menlo', 'monospace']
+                        'sans': ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+                        'mono': ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
                     },
                     colors: {
-                        'canvas': '#FAF8F5',
-                        'canvas-subtle': '#F3EFE9',
-                        'ink': '#191816',
-                        'ink-muted': '#5C5852',
-                        'ink-faint': '#8C867E',
-                        'rule': '#E4DDD3',
-                        'rule-strong': '#191816',
-                        'primary': '#162C46',
-                        'primary-dark': '#0E1C2D',
-                        'vermilion': '#BA2D1D',
-                        'vermilion-hover': '#9F2618',
-                        'forest': '#1B5E38',
-                        'forest-hover': '#14462A',
-                        'gold': '#8A6218',
-                        'surface-card': '#FFFFFF'
+                        'canvas': '#FFFFFF',
+                        'canvas-subtle': '#FAFAFA',
+                        'canvas-muted': '#F4F4F5',
+                        'ink': '#09090B',
+                        'ink-muted': '#52525B',
+                        'ink-faint': '#A1A1AA',
+                        'border-subtle': '#E4E4E7',
+                        'border-muted': '#F4F4F5',
+                        'accent-dark': '#18181B',
+                        'accent-green': '#10B981',
+                        'accent-cream': '#FEFDF8'
                     },
                     boxShadow: {
-                        'crisp': '2px 2px 0 0 #191816',
-                        'crisp-sm': '1px 1px 0 0 #191816',
-                        'crisp-lg': '4px 4px 0 0 #191816'
+                        'soft': '0 2px 8px -2px rgba(0, 0, 0, 0.05), 0 1px 4px -1px rgba(0, 0, 0, 0.03)',
+                        'card': '0 10px 30px -10px rgba(0, 0, 0, 0.06), 0 4px 12px -4px rgba(0, 0, 0, 0.03)',
+                        'floating': '0 25px 50px -12px rgba(0, 0, 0, 0.1)'
                     }
                 }
             }
         }
     </script>
     <style>
-        :root {
-            --bg-canvas: #FAF8F5;
-            --bg-canvas-subtle: #F3EFE9;
-            --bg-surface: #FFFFFF;
-            --color-ink: #191816;
-            --color-ink-muted: #5C5852;
-            --color-ink-faint: #8C867E;
-            --color-rule: #E4DDD3;
-            --color-rule-strong: #191816;
-            --color-primary: #162C46;
-            --color-vermilion: #BA2D1D;
-            --color-forest: #1B5E38;
-        }
-
         body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-canvas);
-            color: var(--color-ink);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            background-color: #FFFFFF;
+            color: #09090B;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-        }
-
-        h1, h2, .font-editorial {
-            font-family: 'Newsreader', Georgia, serif;
-            letter-spacing: -0.02em;
         }
 
         .touch-target {
             min-height: 44px;
             min-width: 44px;
-        }
-
-        .hairline-border {
-            border: 1px solid var(--color-rule);
-        }
-
-        .hairline-b {
-            border-bottom: 1px solid var(--color-rule);
-        }
-
-        .hairline-t {
-            border-top: 1px solid var(--color-rule);
         }
 
         @media print {
@@ -148,105 +112,100 @@
     </style>
     @stack('styles')
 </head>
-<body class="bg-canvas text-ink min-h-screen flex flex-col">
+<body class="bg-white text-ink min-h-screen flex flex-col font-sans">
 
-    <!-- Top Utility Announcement Bar: Editorial Broadsheet Slug -->
-    <div class="bg-ink text-canvas text-xs py-2 px-4 sm:px-6 border-b border-ink">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 font-mono text-[11px] uppercase tracking-wider">
-            <div class="flex items-center gap-3">
-                <span class="inline-flex items-center gap-1.5 text-forest font-bold bg-white/10 px-2 py-0.5 rounded-xs">
-                    <span class="size-1.5 rounded-full bg-emerald-400"></span>
-                    MITRA SETIA &bull; EST. 10+ TAHUN
-                </span>
-                <span class="text-white/30 hidden md:inline">|</span>
-                <span class="text-canvas-subtle hidden md:inline">Software Kasir Minimarket & Hardware Toko Resmi</span>
+    <!-- Top Notice Strip: Ultra Minimalist -->
+    <div class="bg-zinc-50 border-b border-zinc-100 text-[12px] py-2 px-4 sm:px-6 text-zinc-600 font-medium">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-flex items-center justify-center size-2 rounded-full bg-emerald-500"></span>
+                <span>Software Kasir Minimarket Mitra Setia &bull; <strong>Bayar 1x Pakai Selamanya</strong> (Tanpa Langganan)</span>
             </div>
-            <div class="flex items-center gap-4 text-canvas text-[11px]">
-                <a href="#demo-form" class="text-amber-300 hover:text-white transition-colors flex items-center gap-1 font-bold">
-                    [Coba Gratis 30 Hari]
+            <div class="flex items-center gap-4 text-zinc-500 text-[11px] sm:text-xs">
+                <a href="#demo-form" class="text-zinc-900 font-semibold hover:underline">
+                    Coba Gratis 30 Hari
                 </a>
-                <span class="text-white/30">&bull;</span>
-                <a href="{{ route('order.track') }}" class="hover:text-amber-200 transition-colors">
+                <span>&bull;</span>
+                <a href="{{ route('order.track') }}" class="hover:text-zinc-900 transition-colors">
                     Lacak Pesanan
                 </a>
-                <span class="text-white/30">&bull;</span>
-                <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="text-emerald-300 hover:underline">
-                    WA Admin: 0812-3456-7890
+                <span>&bull;</span>
+                <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="text-emerald-700 font-semibold hover:underline">
+                    WA: 0812-3456-7890
                 </a>
             </div>
         </div>
     </div>
 
-    <!-- Main Navigation Bar: Clean Mercantile Masthead -->
-    <header class="sticky top-0 z-40 bg-surface-card/95 backdrop-blur-xs border-b border-rule">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4">
-            <!-- Brand Logo with Editorial Stamp -->
-            <a href="{{ route('home') }}" class="flex items-center gap-3 shrink-0 focus:outline-none focus:ring-1 focus:ring-ink">
-                <div class="size-10 bg-primary text-canvas flex items-center justify-center font-serif text-lg font-bold border border-ink shadow-crisp-sm">
+    <!-- Navigation Bar: Clean White Minimalist -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-zinc-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between gap-4">
+            <!-- Brand Logo -->
+            <a href="{{ route('home') }}" class="flex items-center gap-2.5 focus:outline-none">
+                <div class="size-8 rounded-lg bg-black text-white flex items-center justify-center font-bold text-sm tracking-tight">
                     MS
                 </div>
-                <div>
-                    <span class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-ink block leading-none">
+                <div class="flex flex-col">
+                    <span class="font-extrabold text-base tracking-tight text-black leading-none">
                         Mitra Setia
                     </span>
-                    <span class="font-mono text-[9px] uppercase tracking-widest text-ink-muted block mt-0.5">Software & Mesin Kasir Toko</span>
+                    <span class="text-[10px] text-zinc-400 font-medium mt-0.5">Software &amp; Mesin Kasir</span>
                 </div>
             </a>
 
-            <!-- Desktop Nav Links with Typographic Deliberation -->
-            <nav class="hidden lg:flex items-center gap-7 text-xs uppercase tracking-wider font-bold text-ink-muted">
-                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-ink border-b-2 border-vermilion py-1' : 'hover:text-ink transition-colors py-1' }}">
+            <!-- Desktop Nav Links: Modern Minimalist -->
+            <nav class="hidden lg:flex items-center gap-7 text-[13px] font-medium text-zinc-600">
+                <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-black font-semibold' : 'hover:text-black transition-colors' }}">
                     Beranda
                 </a>
-                <a href="{{ route('catalog') }}" class="{{ request()->routeIs('catalog') ? 'text-ink border-b-2 border-vermilion py-1' : 'hover:text-ink transition-colors py-1' }}">
-                    Katalog Produk
+                <a href="{{ route('catalog') }}" class="{{ request()->routeIs('catalog') ? 'text-black font-semibold' : 'hover:text-black transition-colors' }}">
+                    Katalog
                 </a>
-                <a href="#fitur-software" class="hover:text-ink transition-colors py-1">
-                    Spesifikasi POS
+                <a href="#fitur-software" class="hover:text-black transition-colors">
+                    Fitur Software
                 </a>
-                <a href="#keunggulan" class="hover:text-ink transition-colors py-1">
-                    Nilai Investasi
+                <a href="#keunggulan" class="hover:text-black transition-colors">
+                    Kenapa Kami
                 </a>
-                <a href="#testimoni" class="hover:text-ink transition-colors py-1">
-                    Warta Pengguna
+                <a href="#testimoni" class="hover:text-black transition-colors">
+                    Testimoni
                 </a>
-                <a href="{{ route('pos.index') }}" class="px-3 py-1.5 bg-canvas border border-rule hover:border-ink text-ink text-[11px] font-mono font-bold inline-flex items-center gap-1.5 transition-colors">
-                    <span class="material-symbols-outlined text-sm text-vermilion">point_of_sale</span>
-                    TERMINAL KASIR
+                <a href="{{ route('pos.index') }}" class="px-3 py-1.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 text-xs font-semibold inline-flex items-center gap-1.5 transition-colors">
+                    <span class="size-1.5 rounded-full bg-emerald-500"></span>
+                    Terminal Kasir
                 </a>
             </nav>
 
-            <!-- Actions: Demo, Cart, Staff Auth -->
+            <!-- Actions: Pill Buttons -->
             <div class="flex items-center gap-3">
-                <a href="#demo-form" class="hidden sm:inline-flex h-10 px-4 bg-vermilion hover:bg-vermilion-hover text-white text-xs font-mono font-bold items-center gap-2 border border-ink shadow-crisp-sm transition-all active:translate-x-[1px] active:translate-y-[1px]">
-                    <span class="size-1.5 bg-white rounded-full"></span>
-                    <span>TRIAL 30 HARI</span>
+                <a href="#demo-form" class="h-9 px-4.5 bg-black hover:bg-zinc-800 text-white rounded-full text-xs font-semibold inline-flex items-center justify-center transition-all shadow-xs">
+                    Coba Gratis 30 Hari
                 </a>
 
-                <!-- Cart Counter with Monospace Precision -->
-                <a href="{{ route('cart') }}" class="touch-target flex items-center justify-center p-2 text-ink hover:text-vermilion relative border border-transparent hover:border-rule transition-colors" title="Keranjang Belanja">
-                    <span class="material-symbols-outlined text-2xl">shopping_bag</span>
+                <!-- Cart Button -->
+                <a href="{{ route('cart') }}" class="size-9 rounded-full flex items-center justify-center text-zinc-700 hover:bg-zinc-100 relative transition-colors" title="Keranjang Belanja">
+                    <span class="material-symbols-outlined text-xl">shopping_bag</span>
                     @php 
                         $cart_count = session('cart') ? array_sum(array_column(session('cart'), 'qty')) : 0;
                     @endphp
                     @if($cart_count > 0)
-                        <span class="absolute top-1 right-1 font-mono text-[10px] font-bold bg-vermilion text-white px-1.5 py-0.2 leading-tight border border-ink">
+                        <span class="absolute -top-0.5 -right-0.5 size-4 bg-black text-white text-[9px] font-bold rounded-full flex items-center justify-center">
                             {{ $cart_count }}
                         </span>
                     @endif
                 </a>
 
                 <!-- Staff/Admin Button -->
-                <div class="pl-2 border-l border-rule">
+                <div class="pl-1">
                     @auth
-                        <a href="{{ Auth::user()->isAdmin() ? route('admin.products.index') : route('pos.index') }}" class="h-10 px-3 bg-ink hover:bg-primary text-canvas text-xs font-mono font-semibold inline-flex items-center gap-1.5 border border-ink transition-colors">
+                        <a href="{{ Auth::user()->isAdmin() ? route('admin.products.index') : route('pos.index') }}" class="h-9 px-3.5 bg-zinc-100 hover:bg-zinc-200 text-zinc-800 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition-colors">
                             <span class="material-symbols-outlined text-sm">badge</span>
                             <span class="hidden sm:inline">{{ Auth::user()->name }}</span>
                         </a>
                     @else
-                        <a href="{{ route('admin.login') }}" class="h-10 px-3 border border-rule hover:border-ink text-ink bg-white text-xs font-mono font-semibold inline-flex items-center gap-1.5 transition-colors">
+                        <a href="{{ route('admin.login') }}" class="h-9 px-3 text-zinc-500 hover:text-black rounded-full text-xs font-medium inline-flex items-center gap-1 transition-colors">
                             <span class="material-symbols-outlined text-sm">lock</span>
-                            <span class="hidden sm:inline">Portal Staf</span>
+                            <span class="hidden sm:inline">Login</span>
                         </a>
                     @endauth
                 </div>
@@ -278,92 +237,70 @@
         @yield('content')
     </main>
 
-    <!-- Editorial Ledger Broadsheet Footer -->
-    <footer class="bg-surface-card border-t border-rule-strong mt-20 text-xs text-ink-muted">
-        <!-- Top Broadsheet Strip -->
-        <div class="border-b border-rule bg-canvas-subtle py-4 px-4 sm:px-6">
-            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3 font-mono text-[11px] uppercase tracking-wider">
-                <span class="flex items-center gap-2 text-ink">
-                    <span class="size-2 bg-vermilion rounded-full"></span>
-                    GARANSI RESMI MITRA SETIA &bull; LAYANAN TEKNIS PURNA JUAL
-                </span>
-                <span class="text-ink-muted">
-                    Hotline Teknis: 0812-3456-7890 (Senin - Sabtu 08.30 - 17.00 WIB)
-                </span>
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-14">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-                <!-- Col 1: Brand & Colophon -->
-                <div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="size-8 bg-primary text-canvas flex items-center justify-center font-serif font-bold text-sm border border-ink">
+    <!-- Clean White Minimalist Footer -->
+    <footer class="bg-white border-t border-zinc-100 mt-24 text-xs text-zinc-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2.5">
+                        <div class="size-7 rounded-lg bg-black text-white flex items-center justify-center font-bold text-xs">
                             MS
                         </div>
-                        <span class="font-serif text-lg font-bold text-ink">MITRA SETIA</span>
+                        <span class="font-extrabold text-black text-sm tracking-tight">Mitra Setia</span>
                     </div>
-                    <p class="text-ink-muted text-xs leading-relaxed">
-                        Penyedia peranti kasir terpadu dan lisensi software retail POS Enterprise. Berdedikasi lebih dari 10 tahun mendampingi ratusan toko kelontong, toserba, dan ritel mandiri di seluruh penjuru Indonesia.
+                    <p class="text-zinc-500 text-xs leading-relaxed">
+                        Pusat software kasir POS Enterprise dan hardware mesin kasir terlengkap. Lebih dari 10 tahun mendampingi pelaku usaha ritel, minimarket, grosir, dan toko mandiri di seluruh Indonesia.
                     </p>
-                    <div class="font-mono text-[11px] text-ink-faint border-t border-rule pt-2">
+                    <div class="text-[11px] text-zinc-400 pt-1">
                         Jl. Babarsari No. 12, Sleman, D.I. Yogyakarta 55281
                     </div>
                 </div>
 
-                <!-- Col 2: Kategori & Produk -->
+                <!-- Col 2: Katalog -->
                 <div>
-                    <h4 class="font-mono text-[11px] uppercase tracking-widest font-bold text-ink pb-2 mb-3 border-b border-rule">Katalog Produk</h4>
-                    <ul class="space-y-2 text-xs text-ink-muted">
-                        <li><a href="{{ route('catalog', ['category' => 'Software Kasir']) }}" class="hover:text-vermilion transition-colors flex items-center justify-between"><span>Software POS Enterprise</span><span class="font-mono text-[10px] text-ink-faint">01</span></a></li>
-                        <li><a href="{{ route('catalog', ['category' => 'Paket Usaha']) }}" class="hover:text-vermilion transition-colors flex items-center justify-between"><span>Paket Komplit Mesin Kasir</span><span class="font-mono text-[10px] text-ink-faint">02</span></a></li>
-                        <li><a href="{{ route('catalog', ['category' => 'Printer Kasir']) }}" class="hover:text-vermilion transition-colors flex items-center justify-between"><span>Thermal Receipt Printer</span><span class="font-mono text-[10px] text-ink-faint">03</span></a></li>
-                        <li><a href="{{ route('catalog', ['category' => 'Barcode Scanner']) }}" class="hover:text-vermilion transition-colors flex items-center justify-between"><span>Laser Barcode Scanner</span><span class="font-mono text-[10px] text-ink-faint">04</span></a></li>
-                        <li><a href="{{ route('catalog', ['category' => 'Komputer Kasir']) }}" class="hover:text-vermilion transition-colors flex items-center justify-between"><span>Komputer Kasir All-in-One</span><span class="font-mono text-[10px] text-ink-faint">05</span></a></li>
+                    <h4 class="font-bold text-zinc-900 text-xs uppercase tracking-wider mb-3">Produk &amp; Layanan</h4>
+                    <ul class="space-y-2 text-xs text-zinc-500">
+                        <li><a href="{{ route('catalog', ['category' => 'Software Kasir']) }}" class="hover:text-black transition-colors">Software POS Enterprise</a></li>
+                        <li><a href="{{ route('catalog', ['category' => 'Paket Usaha']) }}" class="hover:text-black transition-colors">Paket Mesin Kasir Lengkap</a></li>
+                        <li><a href="{{ route('catalog', ['category' => 'Printer Kasir']) }}" class="hover:text-black transition-colors">Printer Kasir Thermal</a></li>
+                        <li><a href="{{ route('catalog', ['category' => 'Barcode Scanner']) }}" class="hover:text-black transition-colors">Barcode Scanner 1D &amp; 2D</a></li>
+                        <li><a href="{{ route('catalog', ['category' => 'Komputer Kasir']) }}" class="hover:text-black transition-colors">Komputer Kasir Touchscreen</a></li>
                     </ul>
                 </div>
 
-                <!-- Col 3: Ketentuan Layanan & Standar -->
+                <!-- Col 3: Keunggulan -->
                 <div>
-                    <h4 class="font-mono text-[11px] uppercase tracking-widest font-bold text-ink pb-2 mb-3 border-b border-rule">Integritas Layanan</h4>
-                    <ul class="space-y-2.5 text-xs text-ink-muted">
-                        <li class="border-b border-rule/60 pb-1.5">
-                            <span class="font-bold text-ink block">Beli Putus (Lisensi Seumur Hidup)</span>
-                            <span class="text-[11px] text-ink-faint">Bayar 1x, pakai selamanya tanpa biaya sewa bulanan.</span>
-                        </li>
-                        <li class="border-b border-rule/60 pb-1.5">
-                            <span class="font-bold text-ink block">Garansi 6 Bulan & Free Training 3x</span>
-                            <span class="text-[11px] text-ink-faint">Bimbingan tuntas operasional staf dan pemilik toko.</span>
-                        </li>
-                        <li>
-                            <span class="font-bold text-ink block">Bantuan Teknis Berkelanjutan</span>
-                            <span class="text-[11px] text-ink-faint">Dukungan via WhatsApp & remote desktop.</span>
-                        </li>
+                    <h4 class="font-bold text-zinc-900 text-xs uppercase tracking-wider mb-3">Keunggulan</h4>
+                    <ul class="space-y-2 text-xs text-zinc-500">
+                        <li><strong class="text-zinc-800">Tanpa Biaya Langganan:</strong> Bayar 1x Pakai Selamanya</li>
+                        <li><strong class="text-zinc-800">Garansi 6 Bulan:</strong> Disertai Free Training 3x</li>
+                        <li><strong class="text-zinc-800">Full Support Teknis:</strong> Bantuan via WhatsApp &amp; Remote</li>
+                        <li><strong class="text-zinc-800">Custom Fitur:</strong> Fleksibel untuk segala jenis toko</li>
                     </ul>
                 </div>
 
-                <!-- Col 4: Dispatch Permintaan / Direct Line -->
+                <!-- Col 4: Kontak Cepat -->
                 <div>
-                    <h4 class="font-mono text-[11px] uppercase tracking-widest font-bold text-ink pb-2 mb-3 border-b border-rule">Saluran Langsung</h4>
-                    <p class="text-xs text-ink-muted mb-4 leading-relaxed">Konsultasi kebutuhan toko atau minta installer demo 30 hari langsung ke tim teknis kami:</p>
-                    <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="h-11 px-4 bg-forest hover:bg-forest-hover text-white text-xs font-mono font-bold inline-flex items-center justify-center gap-2 border border-ink shadow-crisp-sm transition-all w-full">
-                        <svg class="size-4 fill-current shrink-0" viewBox="0 0 24 24">
+                    <h4 class="font-bold text-zinc-900 text-xs uppercase tracking-wider mb-3">Konsultasi</h4>
+                    <p class="text-xs text-zinc-500 mb-3.5 leading-relaxed">Hubungi kami untuk konsultasi alur kasir toko Anda atau minta demo 30 hari:</p>
+                    <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="h-10 px-4 bg-zinc-900 hover:bg-black text-white text-xs font-semibold rounded-full inline-flex items-center justify-center gap-2 transition-all w-full shadow-xs">
+                        <svg class="size-4 fill-current shrink-0 text-emerald-400" viewBox="0 0 24 24">
                             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
                         </svg>
-                        <span>HUBUNGI VIA WHATSAPP</span>
+                        <span>Chat WhatsApp</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Bottom Colophon -->
-            <div class="pt-6 border-t border-rule flex flex-col sm:flex-row justify-between items-center gap-3 font-mono text-[11px] text-ink-faint">
-                <div>&copy; {{ date('Y') }} MITRA SETIA &bull; SELURUH HAK CIPTA DILINDUNGI</div>
+            <div class="pt-8 border-t border-zinc-100 flex flex-col sm:flex-row justify-between items-center gap-3 text-zinc-400 text-xs">
+                <div>&copy; {{ date('Y') }} Mitra Setia. Seluruh hak cipta dilindungi.</div>
                 <div class="flex items-center gap-5">
-                    <a href="{{ route('catalog') }}" class="hover:text-ink transition-colors">Katalog Lengkap</a>
-                    <span>/</span>
-                    <a href="{{ route('order.track') }}" class="hover:text-ink transition-colors">Pelacakan Pesanan</a>
-                    <span>/</span>
-                    <a href="{{ route('admin.login') }}" class="hover:text-ink transition-colors">Akses Karyawan</a>
+                    <a href="{{ route('catalog') }}" class="hover:text-black transition-colors">Katalog</a>
+                    <span>&bull;</span>
+                    <a href="{{ route('order.track') }}" class="hover:text-black transition-colors">Lacak Pesanan</a>
+                    <span>&bull;</span>
+                    <a href="{{ route('admin.login') }}" class="hover:text-black transition-colors">Login Staf</a>
                 </div>
             </div>
         </div>

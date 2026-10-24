@@ -97,50 +97,50 @@
             </div>
 
             <!-- Price Container (High Contrast) -->
-            <div class="p-4 bg-white rounded-xl border border-border-subtle shadow-xs flex items-center justify-between">
+            <div class="p-6 bg-white rounded-3xl border border-zinc-200/80 shadow-sm flex items-center justify-between">
                 <div>
-                    <span class="text-xs text-slate-500 block">Harga Satuan Resmi:</span>
-                    <div class="text-2xl sm:text-3xl font-black text-slate-900 mt-0.5">
+                    <span class="text-xs text-zinc-400 block font-medium">Harga Resmi:</span>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-black mt-0.5">
                         Rp {{ number_format($product->price, 0, ',', '.') }}
                     </div>
                 </div>
                 <div class="text-right text-xs">
                     <span class="font-bold text-emerald-700 block">&bull; Garansi Resmi 1 Tahun</span>
-                    <span class="text-slate-500 block mt-0.5">Siap kirim area Jogja</span>
+                    <span class="text-zinc-500 block mt-0.5">Siap kirim ke seluruh Indonesia</span>
                 </div>
             </div>
 
             <!-- Description -->
             <div>
-                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Deskripsi Hardware</h2>
-                <div class="text-xs sm:text-sm text-slate-600 leading-relaxed whitespace-pre-line bg-white p-4 rounded-xl border border-border-subtle">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-zinc-700 mb-2">Deskripsi Produk</h2>
+                <div class="text-xs sm:text-sm text-zinc-600 leading-relaxed whitespace-pre-line bg-zinc-50/60 p-5 rounded-3xl border border-zinc-100">
                     {{ $product->description }}
                 </div>
             </div>
 
             <!-- Order Action Form -->
-            <form action="{{ route('cart.add') }}" method="POST" class="space-y-4 pt-3 border-t border-border-subtle">
+            <form action="{{ route('cart.add') }}" method="POST" class="space-y-4 pt-4 border-t border-zinc-100">
                 @csrf
                 <input type="hidden" name="id" value="{{ $product->id }}">
 
                 <div class="flex items-center gap-4">
-                    <label class="text-xs font-bold text-slate-700">Jumlah Beli:</label>
-                    <div class="flex items-center border border-border-bold bg-white rounded-lg h-11 w-32">
-                        <button type="button" onclick="let input = document.getElementById('qtyInput'); if(input.value > 1) input.value--;" class="w-10 text-slate-600 hover:text-primary font-bold text-lg focus:outline-none">-</button>
-                        <input type="number" id="qtyInput" name="qty" value="1" min="1" max="{{ $product->stock }}" class="w-12 text-center text-sm font-bold border-x border-border-bold py-1 focus:outline-none" readonly>
-                        <button type="button" onclick="let input = document.getElementById('qtyInput'); if(input.value < {{ $product->stock }}) input.value++;" class="w-10 text-slate-600 hover:text-primary font-bold text-lg focus:outline-none">+</button>
+                    <label class="text-xs font-bold text-zinc-700">Jumlah Beli:</label>
+                    <div class="flex items-center border border-zinc-200 bg-white rounded-full h-10 px-1">
+                        <button type="button" onclick="let input = document.getElementById('qtyInput'); if(input.value > 1) input.value--;" class="w-8 text-zinc-600 hover:text-black font-bold text-base focus:outline-none">-</button>
+                        <input type="number" id="qtyInput" name="qty" value="1" min="1" max="{{ $product->stock }}" class="w-10 text-center text-xs font-bold border-none py-1 focus:outline-none" readonly>
+                        <button type="button" onclick="let input = document.getElementById('qtyInput'); if(input.value < {{ $product->stock }}) input.value++;" class="w-8 text-zinc-600 hover:text-black font-bold text-base focus:outline-none">+</button>
                     </div>
-                    <span class="text-xs text-slate-500">Tersisa {{ $product->stock }} unit</span>
+                    <span class="text-xs text-zinc-400">Tersisa {{ $product->stock }} unit</span>
                 </div>
 
                 <!-- Primary Action Buttons (Min 44px) -->
-                <div class="space-y-2.5">
-                    <button type="submit" name="buy_now" value="1" class="w-full h-12 px-4 bg-primary hover:bg-primary-dark text-white rounded-lg font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-colors shadow-xs" {{ $product->stock <= 0 ? 'disabled' : '' }}>
+                <div class="space-y-2.5 pt-2">
+                    <button type="submit" name="buy_now" value="1" class="w-full h-12 px-6 bg-black hover:bg-zinc-800 text-white rounded-full font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-all shadow-sm" {{ $product->stock <= 0 ? 'disabled' : '' }}>
                         <span class="material-symbols-outlined text-lg">shopping_bag</span>
-                        <span>Beli</span>
+                        <span>Beli Sekarang</span>
                     </button>
 
-                    <button type="submit" class="w-full h-11 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg font-bold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-colors border border-border-bold" {{ $product->stock <= 0 ? 'disabled' : '' }}>
+                    <button type="submit" class="w-full h-11 px-6 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 rounded-full font-semibold text-xs sm:text-sm inline-flex items-center justify-center gap-2 transition-colors" {{ $product->stock <= 0 ? 'disabled' : '' }}>
                         <span class="material-symbols-outlined text-base">add_shopping_cart</span>
                         <span>+ Tambah ke Keranjang Belanja</span>
                     </button>

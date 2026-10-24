@@ -3,37 +3,37 @@
 @section('title', 'Lacak Status Pesanan - Mitra Setia')
 
 @section('content')
-<div class="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 min-h-[75vh]">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 py-10 min-h-[75vh]">
     <!-- Breadcrumbs -->
-    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6">
-        <a href="{{ route('home') }}" class="hover:text-primary transition-colors">Beranda</a>
+    <nav class="flex items-center gap-2 text-xs text-zinc-400 mb-6">
+        <a href="{{ route('home') }}" class="hover:text-black transition-colors">Beranda</a>
         <span>/</span>
-        <span class="text-slate-800 font-semibold">Lacak Pesanan</span>
+        <span class="text-black font-semibold">Lacak Pesanan</span>
     </nav>
 
     <!-- Search Box Card -->
-    <div class="bg-white rounded-xl border border-border-subtle p-6 sm:p-8 shadow-xs mb-8 text-center">
-        <div class="size-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3">
+    <div class="bg-white rounded-3xl border border-zinc-200/80 p-8 sm:p-12 shadow-sm mb-10 text-center">
+        <div class="size-14 rounded-2xl bg-zinc-100 text-black flex items-center justify-center mx-auto mb-4">
             <span class="material-symbols-outlined text-2xl">local_shipping</span>
         </div>
-        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Pelacakan Pesanan Hardware</h1>
-        <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-md mx-auto">
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-black tracking-tight">Pelacakan Pesanan</h1>
+        <p class="text-xs sm:text-sm text-zinc-500 mt-1 max-w-md mx-auto">
             Periksa status verifikasi pembayaran, persiapan packing, dan pengiriman paket hardware Anda.
         </p>
 
-        <form action="{{ route('order.track') }}" method="GET" class="mt-6 max-w-xl mx-auto">
-            <div class="flex flex-col sm:flex-row items-center gap-2">
+        <form action="{{ route('order.track') }}" method="GET" class="mt-8 max-w-xl mx-auto">
+            <div class="flex flex-col sm:flex-row items-center gap-2.5">
                 <div class="relative flex-grow w-full">
                     <input type="text" name="q" value="{{ $search }}" required
-                           placeholder="Masukkan Nomor Faktur (INV-EC-...) atau Nomor HP..."
-                           class="w-full h-11 px-3 text-xs sm:text-sm rounded-lg border border-border-bold focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-slate-800">
+                           placeholder="Nomor Faktur (INV-EC-...) atau Nomor HP..."
+                           class="w-full h-11 px-4 text-xs sm:text-sm rounded-full bg-zinc-50 border border-zinc-200 focus:bg-white focus:border-black focus:outline-none text-black transition-all">
                 </div>
-                <button type="submit" class="w-full sm:w-auto h-11 px-6 bg-primary hover:bg-primary-dark text-white rounded-lg font-bold text-xs sm:text-sm transition-colors shadow-xs shrink-0">
+                <button type="submit" class="w-full sm:w-auto h-11 px-7 bg-black hover:bg-zinc-800 text-white rounded-full font-semibold text-xs sm:text-sm transition-all shadow-sm shrink-0">
                     Cari Pesanan
                 </button>
             </div>
-            <div class="text-[11px] text-slate-400 mt-2">
-                Contoh: <code class="font-mono bg-slate-100 px-1 py-0.5 rounded text-slate-600">INV-EC-2026...</code> atau nomor WhatsApp yang dipakai saat checkout.
+            <div class="text-[11px] text-zinc-400 mt-2.5">
+                Contoh: <code class="font-mono bg-zinc-100 px-1.5 py-0.5 rounded text-zinc-700">INV-EC-2026...</code> atau nomor WhatsApp saat checkout.
             </div>
         </form>
     </div>
