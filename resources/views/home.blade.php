@@ -57,57 +57,133 @@
     <div class="max-w-5xl mx-auto px-4 sm:px-6 mt-12 sm:mt-16">
         <div class="bg-white rounded-3xl p-4 sm:p-7 border border-zinc-200/80 shadow-2xl shadow-zinc-200/50">
             <!-- Terminal Header Bar -->
-            <div class="flex items-center justify-between pb-4 border-b border-zinc-100 mb-6">
+            <div class="flex items-center justify-between pb-4 border-b border-zinc-100 mb-5">
                 <div class="flex items-center gap-2">
-                    <span class="size-3 rounded-full bg-zinc-200"></span>
-                    <span class="size-3 rounded-full bg-zinc-200"></span>
-                    <span class="size-3 rounded-full bg-zinc-200"></span>
-                    <span class="text-xs font-semibold text-zinc-400 ml-2">POS ENTERPRISE &mdash; Minimarket Edition</span>
+                    <span class="size-3 rounded-full bg-red-400"></span>
+                    <span class="size-3 rounded-full bg-amber-400"></span>
+                    <span class="size-3 rounded-full bg-emerald-400"></span>
+                    <span class="text-xs font-bold text-zinc-800 ml-2">POS ENTERPRISE v10.4 &mdash; Edisi Ritel &amp; Minimarket</span>
                 </div>
                 <div class="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
                     <span class="size-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Multi-Kasir Siap Pakai</span>
+                    <span>Status: Database Lokal Aktif (Offline Ready)</span>
                 </div>
             </div>
 
-            <!-- Terminal Mockup Body: Clean 3-Column Interface -->
+            <!-- Realistic POS Cashier Screen Simulation -->
+            <div class="bg-zinc-950 text-white rounded-2xl p-4 sm:p-5 mb-5 font-mono text-xs overflow-hidden shadow-inner">
+                <!-- POS Status Line -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-zinc-800 text-[11px] text-zinc-400">
+                    <div class="flex items-center gap-3">
+                        <span>KASIR: <strong class="text-white">01 (Utama)</strong></span>
+                        <span>&bull;</span>
+                        <span>SHIFT: <strong class="text-white">Pagi / Buka</strong></span>
+                        <span>&bull;</span>
+                        <span>FAKTUR: <strong class="text-emerald-400">TRX-20261024-0042</strong></span>
+                    </div>
+                    <div class="text-emerald-400 font-bold flex items-center gap-1.5">
+                        <span class="size-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        MODE BARCODE SCANNER: AKTIF
+                    </div>
+                </div>
+
+                <!-- Transaction Items Table Preview -->
+                <div class="py-3 space-y-2 text-[11px] sm:text-xs">
+                    <div class="hidden sm:grid grid-cols-12 text-zinc-500 font-bold border-b border-zinc-900 pb-1.5 uppercase text-[10px]">
+                        <div class="col-span-2">Kode / Barcode</div>
+                        <div class="col-span-5">Nama Barang</div>
+                        <div class="col-span-1 text-center">Qty</div>
+                        <div class="col-span-2 text-right">Harga</div>
+                        <div class="col-span-2 text-right">Subtotal</div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-1 sm:gap-0 text-zinc-300">
+                        <div class="sm:col-span-2 text-zinc-500 font-medium">8992753001</div>
+                        <div class="sm:col-span-5 font-semibold text-white">Minyak Goreng Bimoli 2L</div>
+                        <div class="sm:col-span-1 sm:text-center text-zinc-400">2 pcs</div>
+                        <div class="sm:col-span-2 sm:text-right text-zinc-400">Rp 34.000</div>
+                        <div class="sm:col-span-2 sm:text-right font-bold text-white">Rp 68.000</div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-1 sm:gap-0 text-zinc-300">
+                        <div class="sm:col-span-2 text-zinc-500 font-medium">8999909012</div>
+                        <div class="sm:col-span-5 font-semibold text-white">Beras Premium Ramos 5kg</div>
+                        <div class="sm:col-span-1 sm:text-center text-zinc-400">1 sak</div>
+                        <div class="sm:col-span-2 sm:text-right text-zinc-400">Rp 72.500</div>
+                        <div class="sm:col-span-2 sm:text-right font-bold text-white">Rp 72.500</div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-12 items-center gap-1 sm:gap-0 text-zinc-300">
+                        <div class="sm:col-span-2 text-zinc-500 font-medium">8991001004</div>
+                        <div class="sm:col-span-5 font-semibold text-white">Gula Pasir Gulaku 1kg</div>
+                        <div class="sm:col-span-1 sm:text-center text-zinc-400">1 pcs</div>
+                        <div class="sm:col-span-2 sm:text-right text-zinc-400">Rp 17.500</div>
+                        <div class="sm:col-span-2 sm:text-right font-bold text-white">Rp 17.500</div>
+                    </div>
+                </div>
+
+                <!-- Total & Calculation Ribbon -->
+                <div class="pt-3 border-t border-zinc-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 bg-zinc-900/70 p-3 rounded-xl mt-1">
+                    <div class="flex items-center gap-4 text-xs">
+                        <span class="text-zinc-400">Item: <strong class="text-white">4 pcs</strong></span>
+                        <span class="text-zinc-400">Bayar: <strong class="text-white">Rp 200.000 (Tunai)</strong></span>
+                        <span class="text-emerald-400 font-bold">Kembali: Rp 42.000</span>
+                    </div>
+                    <div class="text-right sm:text-right w-full sm:w-auto">
+                        <span class="text-[10px] text-zinc-400 uppercase tracking-widest block">TOTAL AKHIR</span>
+                        <span class="text-lg sm:text-xl font-extrabold text-emerald-400 tracking-tight">Rp 158.000</span>
+                    </div>
+                </div>
+
+                <!-- Keyboard Shortcut Guide Bar -->
+                <div class="mt-3 pt-2.5 border-t border-zinc-800/60 flex flex-wrap items-center justify-between gap-2 text-[10px] text-zinc-400">
+                    <span class="flex items-center gap-1"><kbd class="bg-zinc-800 text-white px-1.5 py-0.5 rounded font-bold">F1</kbd> Cari Barang</span>
+                    <span class="flex items-center gap-1"><kbd class="bg-zinc-800 text-white px-1.5 py-0.5 rounded font-bold">F2</kbd> Ubah Qty</span>
+                    <span class="flex items-center gap-1"><kbd class="bg-zinc-800 text-white px-1.5 py-0.5 rounded font-bold">F4</kbd> Diskon</span>
+                    <span class="flex items-center gap-1"><kbd class="bg-zinc-800 text-white px-1.5 py-0.5 rounded font-bold">F5</kbd> Bayar / Selesai</span>
+                    <span class="flex items-center gap-1"><kbd class="bg-zinc-800 text-white px-1.5 py-0.5 rounded font-bold">F7</kbd> Pending Transaksi</span>
+                    <span class="flex items-center gap-1"><kbd class="bg-zinc-800 text-white px-1.5 py-0.5 rounded font-bold">F12</kbd> Cetak Ulang Struk</span>
+                </div>
+            </div>
+
+            <!-- 3 Benefit Pillars underneath -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
                 <!-- Col 1: Shortcut & Input Barang -->
-                <div class="bg-zinc-50 rounded-2xl p-5 border border-zinc-100 flex flex-col justify-between">
+                <div class="bg-zinc-50 rounded-2xl p-4 sm:p-5 border border-zinc-100 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold text-zinc-800 uppercase tracking-wider">Input Transaksi</span>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-zinc-800 uppercase tracking-wider">Input Kilat</span>
                             <span class="font-mono text-[11px] font-bold bg-white border border-zinc-200 px-2 py-0.5 rounded text-zinc-700">F1</span>
                         </div>
                         <p class="text-xs text-zinc-500 leading-relaxed">
                             Cari barang instan via Barcode Scanner atau ketik nama/kode barang tanpa sentuh mouse.
                         </p>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-zinc-200/60 font-mono text-[11px] text-zinc-700">
-                        &gt; Scan barcode: 8992753... [Ready]
+                    <div class="mt-3 pt-2.5 border-t border-zinc-200/60 font-mono text-[11px] text-zinc-700">
+                        &gt; Barcode &amp; Autocomplete Ready
                     </div>
                 </div>
 
                 <!-- Col 2: Multi-Payment & QRIS -->
-                <div class="bg-zinc-50 rounded-2xl p-5 border border-zinc-100 flex flex-col justify-between">
+                <div class="bg-zinc-50 rounded-2xl p-4 sm:p-5 border border-zinc-100 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold text-zinc-800 uppercase tracking-wider">Pembayaran</span>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold text-zinc-800 uppercase tracking-wider">Multi-Pembayaran</span>
                             <span class="font-mono text-[11px] font-bold bg-white border border-zinc-200 px-2 py-0.5 rounded text-zinc-700">F5</span>
                         </div>
                         <p class="text-xs text-zinc-500 leading-relaxed">
                             Support Tunai, Transfer Bank, Debit, E-Wallet, QRIS Dinamis, dan Piutang Member.
                         </p>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-zinc-200/60 font-mono text-[11px] text-emerald-700 font-bold">
-                        &gt; QRIS / Debit / Cash Auto-Calc
+                    <div class="mt-3 pt-2.5 border-t border-zinc-200/60 font-mono text-[11px] text-emerald-700 font-bold">
+                        &gt; Hitung Kembalian Otomatis
                     </div>
                 </div>
 
                 <!-- Col 3: Cetak Struk & Laporan -->
-                <div class="bg-zinc-50 rounded-2xl p-5 border border-zinc-100 flex flex-col justify-between">
+                <div class="bg-zinc-50 rounded-2xl p-4 sm:p-5 border border-zinc-100 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center justify-between mb-3">
+                        <div class="flex items-center justify-between mb-2">
                             <span class="text-xs font-bold text-zinc-800 uppercase tracking-wider">Cetak &amp; Rekap</span>
                             <span class="font-mono text-[11px] font-bold bg-white border border-zinc-200 px-2 py-0.5 rounded text-zinc-700">F12</span>
                         </div>
@@ -115,14 +191,14 @@
                             Cetak struk thermal 58/80mm, auto buka laci cash drawer, dan rekap omzet kasir harian.
                         </p>
                     </div>
-                    <div class="mt-4 pt-3 border-t border-zinc-200/60 font-mono text-[11px] text-zinc-700">
+                    <div class="mt-3 pt-2.5 border-t border-zinc-200/60 font-mono text-[11px] text-zinc-700">
                         &gt; Laci Terbuka &bull; Struk Selesai
                     </div>
                 </div>
             </div>
 
             <!-- Terminal Footer Banner -->
-            <div class="mt-6 pt-5 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
+            <div class="mt-5 pt-4 border-t border-zinc-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500">
                 <div>
                     <strong class="text-black font-semibold">Bayar 1x Pakai Selamanya</strong> &bull; Tanpa beban biaya sewa atau biaya per transaksi.
                 </div>
@@ -157,7 +233,7 @@
 <!-- =======================================================================
      3. EMPAT PILAR POS ENTERPRISE (CLEAN LIST CARDS)
 ======================================================================= -->
-<section id="fitur-software" class="py-20 sm:py-28 bg-zinc-50/60 border-b border-zinc-100">
+<section id="fitur-software" class="scroll-mt-20 py-20 sm:py-28 bg-zinc-50/60 border-b border-zinc-100">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
         
         <div class="text-center max-w-xl mx-auto mb-16">
@@ -389,7 +465,7 @@
 <!-- =======================================================================
      6. KENAPA HARUS MEMILIH POS ENTERPRISE? (VALUE COMPARISON)
 ======================================================================= -->
-<section id="keunggulan" class="py-20 sm:py-28 bg-white border-b border-zinc-100">
+<section id="keunggulan" class="scroll-mt-20 py-20 sm:py-28 bg-white border-b border-zinc-100">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
         
         <div class="text-center max-w-2xl mx-auto mb-16">
@@ -597,7 +673,7 @@
 <!-- =======================================================================
      8. TESTIMONI PENGGUNA (CLEAN WHITE EDITORIAL QUOTES)
 ======================================================================= -->
-<section id="testimoni" class="py-20 sm:py-28 bg-white border-b border-zinc-100">
+<section id="testimoni" class="scroll-mt-20 py-20 sm:py-28 bg-white border-b border-zinc-100">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
         
         <div class="text-center max-w-xl mx-auto mb-16">
@@ -704,7 +780,7 @@
 <!-- =======================================================================
      9. FORM DEMO 30 HARI & DOWNLOAD SEKARANG
 ======================================================================= -->
-<section id="demo-form" class="py-20 sm:py-28 bg-zinc-50/60">
+<section id="demo-form" class="scroll-mt-20 py-20 sm:py-28 bg-zinc-50/60">
     <div class="max-w-3xl mx-auto px-4 sm:px-6">
         
         <div class="bg-white rounded-3xl p-8 sm:p-12 border border-zinc-200/80 shadow-card">
@@ -724,6 +800,19 @@
                 </p>
                 <div class="text-xs font-semibold text-black mt-3">
                     Download POS Enterprise sekarang dan Anda dapat mencoba secara GRATIS selama 30 hari dengan full fitur aktif.
+                </div>
+            </div>
+
+            <!-- Feedback Banner (Hidden by default, shown on submit) -->
+            <div id="demo-feedback" class="hidden mb-6 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-xs sm:text-sm">
+                <div class="flex items-start gap-3">
+                    <span class="material-symbols-outlined text-emerald-600 text-xl shrink-0 mt-0.5">check_circle</span>
+                    <div>
+                        <strong class="font-bold block text-emerald-900">Permintaan Anda Berhasil Disiapkan!</strong>
+                        <p class="mt-0.5 text-emerald-800">
+                            Jendela WhatsApp sedang dibuka otomatis untuk menghubungi Helpdesk Mitra Setia. Jika chat belum terbuka, <a id="demo-fallback-link" href="#" target="_blank" class="underline font-bold text-emerald-950 hover:text-black">klik di sini untuk membuka WhatsApp</a>.
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -780,9 +869,9 @@
                 </div>
 
                 <div class="pt-3">
-                    <button type="submit" class="w-full h-12 bg-black hover:bg-zinc-800 text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-sm">
-                        <span class="material-symbols-outlined text-lg">send</span>
-                        <span>Kirim Permintaan &bull; Hubungkan ke WhatsApp</span>
+                    <button type="submit" id="demo_submit_btn" class="w-full h-12 bg-black hover:bg-zinc-800 text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-sm">
+                        <span class="material-symbols-outlined text-lg" id="demo_btn_icon">send</span>
+                        <span id="demo_btn_text">Kirim Permintaan &bull; Hubungkan ke WhatsApp</span>
                     </button>
                     <p class="text-[11px] text-zinc-400 text-center mt-3">
                         Tim teknis Mitra Setia akan langsung merespons dan mengirimkan installer coba gratis 30 hari.
@@ -869,6 +958,12 @@ function handleDemoRequest(e) {
     const subject = document.getElementById('demo_subject').value;
     const notes = document.getElementById('demo_notes').value.trim();
 
+    const submitBtn = document.getElementById('demo_submit_btn');
+    const btnIcon = document.getElementById('demo_btn_icon');
+    const btnText = document.getElementById('demo_btn_text');
+    const feedback = document.getElementById('demo-feedback');
+    const fallbackLink = document.getElementById('demo-fallback-link');
+
     let text = `Halo Tim Mitra Setia, saya ingin mengajukan:\n\n`
              + `*Subject:* ${subject}\n`
              + `*Nama:* ${name}\n`
@@ -883,7 +978,34 @@ function handleDemoRequest(e) {
     text += `\nMohon dibantu link download dan panduan aktivasi coba gratis 30 hari POS Enterprise. Terima kasih!`;
 
     const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(text)}`;
+
+    // Show visual confirmation on the page
+    if (fallbackLink) {
+        fallbackLink.href = waUrl;
+    }
+    if (feedback) {
+        feedback.classList.remove('hidden');
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    if (submitBtn) {
+        btnIcon.textContent = 'check_circle';
+        btnText.textContent = 'Membuka WhatsApp...';
+        submitBtn.classList.remove('bg-black', 'hover:bg-zinc-800');
+        submitBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+    }
+
+    // Open WhatsApp
     window.open(waUrl, '_blank');
+
+    setTimeout(() => {
+        if (submitBtn) {
+            btnIcon.textContent = 'send';
+            btnText.textContent = 'Kirim Ulang &bull; Hubungkan ke WhatsApp';
+            submitBtn.classList.remove('bg-emerald-600', 'hover:bg-emerald-700');
+            submitBtn.classList.add('bg-black', 'hover:bg-zinc-800');
+        }
+    }, 4000);
 }
 </script>
 
