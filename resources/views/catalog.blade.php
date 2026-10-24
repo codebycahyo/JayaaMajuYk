@@ -125,12 +125,34 @@
         <main class="lg:col-span-9">
             @if ($products->isEmpty())
                 <div class="bg-white rounded-3xl border border-zinc-200/80 p-12 text-center shadow-sm">
-                    <span class="material-symbols-outlined text-4xl text-zinc-300 mb-2">search_off</span>
-                    <h2 class="text-base font-bold text-black">Produk Tidak Ditemukan</h2>
-                    <p class="text-xs text-zinc-500 mt-1 max-w-sm mx-auto">Tidak ada hardware atau software yang cocok dengan filter Anda. Silakan reset filter untuk menampilkan semua produk.</p>
-                    <a href="{{ route('catalog') }}" class="mt-4 inline-flex items-center h-10 px-5 bg-black text-white text-xs font-semibold rounded-full hover:bg-zinc-800 transition-colors">
-                        Reset Filter
-                    </a>
+                    @if(request()->hasAny(['search', 'category', 'min_price', 'max_price', 'ready_only', 'sort']))
+                        <span class="material-symbols-outlined text-4xl text-zinc-300 mb-2">search_off</span>
+                        <h2 class="text-base font-bold text-black">Produk Tidak Ditemukan</h2>
+                        <p class="text-xs text-zinc-500 mt-1 max-w-sm mx-auto">Tidak ada hardware atau software yang cocok dengan filter Anda. Silakan reset filter untuk menampilkan semua produk.</p>
+                        <a href="{{ route('catalog') }}" class="mt-4 inline-flex items-center h-10 px-5 bg-black text-white text-xs font-semibold rounded-full hover:bg-zinc-800 transition-colors">
+                            Reset Filter
+                        </a>
+                    @else
+                        <span class="material-symbols-outlined text-4xl text-zinc-300 mb-2">inventory_2</span>
+                        <h2 class="text-base font-bold text-black">Katalog Produk Sedang Dipersiapkan</h2>
+                        <p class="text-xs text-zinc-500 mt-1.5 max-w-sm mx-auto leading-relaxed">
+                            Belum ada produk yang ditambahkan ke katalog. Anda dapat langsung berkonsultasi mengenai kebutuhan mesin kasir &amp; software POS Enterprise via WhatsApp.
+                        </p>
+                        <div class="mt-5 flex flex-wrap items-center justify-center gap-3">
+                            <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="inline-flex items-center h-10 px-5 bg-black text-white text-xs font-semibold rounded-full hover:bg-zinc-800 transition-colors gap-2">
+                                <span>Konsultasi WhatsApp</span>
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                            </a>
+                            @auth
+                                @if(Auth::user()->isAdmin())
+                                    <a href="{{ route('admin.products.create') }}" class="inline-flex items-center h-10 px-4 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 text-xs font-semibold rounded-full transition-colors gap-1.5">
+                                        <span class="material-symbols-outlined text-sm">add</span>
+                                        <span>+ Tambah Produk Baru (Admin)</span>
+                                    </a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
                 </div>
             @else
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">

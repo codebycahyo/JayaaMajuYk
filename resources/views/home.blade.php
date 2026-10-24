@@ -680,7 +680,7 @@
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            @foreach ($featuredProducts as $product)
+            @forelse ($featuredProducts as $product)
                 <div class="bg-white rounded-3xl p-5 border border-zinc-200/80 hover:border-black transition-all shadow-sm flex flex-col justify-between">
                     <div>
                         <!-- Category Badge & Stock -->
@@ -764,7 +764,29 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-span-full py-12 px-6 text-center bg-white rounded-3xl border border-zinc-200/80 shadow-xs">
+                    <span class="material-symbols-outlined text-4xl text-zinc-300 mb-2">inventory_2</span>
+                    <h3 class="text-base font-bold text-black mb-1">Katalog Produk Sedang Dipersiapkan</h3>
+                    <p class="text-xs sm:text-sm text-zinc-500 max-w-md mx-auto mb-6 leading-relaxed">
+                        Daftar paket software POS Enterprise dan perangkat mesin kasir akan segera ditambahkan. Untuk konsultasi spesifikasi atau pemesanan langsung, silakan hubungi tim kami via WhatsApp.
+                    </p>
+                    <div class="flex flex-wrap items-center justify-center gap-3">
+                        <a href="https://wa.me/6281234567890?text={{ urlencode('Halo Mitra Setia, saya ingin konsultasi software kasir & mesin kasir.') }}" target="_blank" class="h-10 px-5 bg-black hover:bg-zinc-800 text-white rounded-full text-xs font-semibold inline-flex items-center gap-2 transition-all">
+                            <span>Hubungi Konsultasi WhatsApp</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                        </a>
+                        @auth
+                            @if(Auth::user()->isAdmin())
+                                <a href="{{ route('admin.products.create') }}" class="h-10 px-4 bg-zinc-100 hover:bg-zinc-200 text-zinc-900 rounded-full text-xs font-semibold inline-flex items-center gap-1.5 transition-all">
+                                    <span class="material-symbols-outlined text-sm">add</span>
+                                    <span>+ Tambah Produk (Admin)</span>
+                                </a>
+                            @endif
+                        @endauth
+                    </div>
+                </div>
+            @endforelse
         </div>
 
     </div>

@@ -39,17 +39,15 @@ class AppServiceProvider extends ServiceProvider
             }
         }
 
-        // Auto-migrate & seed tables on remote cloud hosting if connected to a fresh database
+        // Auto-migrate & seed admin table on remote cloud hosting if connected to a fresh database
         if (!$isLocalHost && !app()->runningInConsole()) {
             try {
                 @set_time_limit(180);
                 \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
 
                 if (\App\Models\User::count() === 0) {
-                    \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
-                } elseif (!\App\Models\Product::where('id', 'pos-enterprise-software')->exists()) {
                     \Illuminate\Support\Facades\Artisan::call('db:seed', [
-                        '--class' => 'ProductSeeder',
+                        '--class' => 'AdminUserSeeder',
                         '--force' => true,
                     ]);
                 }
